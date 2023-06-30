@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models\Backend;
+use App\Models\Backend\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,4 +21,7 @@ class Category extends Model
         'meta_descrip',
         'meta_keywords'
     ];
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

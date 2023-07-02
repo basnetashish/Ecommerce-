@@ -7,15 +7,15 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form role="form" action="{{url('/backend/product/update'.$produucts->id)}}" method="POST" enctype="multipart/form-data">
+    <form role="form" action="{{url('backend/product/update/'.$products->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
       <div class="card-body">
          <!-- select -->
          <div class="form-group">
             <label>Category</label>
-            <select class="form-control"  name="cate_id">
-              <option  value="{{$products}}" >{{$products->category->name}}</option>
+            <select class="form-control"  name="category_id">
+              <option  value="{{$products->cate_id}}" >{{$products->category->name}}</option>
             </select>
 
         </div>

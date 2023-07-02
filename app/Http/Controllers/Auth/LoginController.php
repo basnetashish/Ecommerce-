@@ -59,7 +59,7 @@ class LoginController extends Controller
                             break;
 
                          case 'user':
-                            return redirect()->route('home');
+                            return redirect()->route('userhome');
                             break;
                          default:
                             Auth()->logout();

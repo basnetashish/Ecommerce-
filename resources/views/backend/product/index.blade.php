@@ -29,9 +29,9 @@
               <tr>
                 <th>Category </th>
                 <th>Product Name</th>
-                <th>Slug</th>
-                <th>Small Description</th>
-                <th>Description</th>
+                {{-- <th>Slug</th> --}}
+                {{-- <th>Small Description</th>
+                <th>Description</th> --}}
                 <th>Orginal Price</th>
                 <th>Selling Price</th>
                 <th>Image</th>
@@ -39,9 +39,9 @@
                 <th>Tax</th>
                 <th>Status</th>
                 <th>Trending</th>
-                <th>Meta Title</th>
+                {{-- <th>Meta Title</th>
                 <th>Meta Description</th>
-                <th>Meta Keywords</th>
+                <th>Meta Keywords</th> --}}
                 <th>Action</th>
               </tr>
             </thead>
@@ -49,9 +49,9 @@
               @foreach($Products as $product)
                <td>{{$product->category->name}}</td>
               <td>{{$product->name}}</td>
-              <td>{{$product->slug}}</td>
+              {{-- <td>{{$product->slug}}</td>
               <td>{{$product->small_description}}</td>
-              <td>{{$product->description}}</td>
+              <td>{{$product->description}}</td> --}}
               <td>{{$product->orginal_price}}</td>
               <td>{{$product->selling_price}}</td>
               <td>
@@ -62,9 +62,9 @@
               <td>{{$product->tax}}</td>
               <td>{{$product->status}}</td>
               <td>{{$product->trending}}</td>
-              <td>{{$product->meta_title}}</td>
+              {{-- <td>{{$product->meta_title}}</td>
               <td>{{$product->meta_descrip}}</td>
-              <td>{{$product->meta_keywords}}</td>
+              <td>{{$product->meta_keywords}}</td> --}}
               <td>
                 <a href="{{url('backend/product/show/'.$product->id)}}"> <button type="submit" class="btn btn-info">show</button></a>
                 <a href="{{url('backend/product/edit/'.$product->id)}}"> <button type="submit" class="btn btn-warning">Edit</button></a>

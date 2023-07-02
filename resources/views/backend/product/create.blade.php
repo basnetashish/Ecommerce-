@@ -1,9 +1,10 @@
 @extends('layouts.backend')
 @section('content')
  
-<div class="card card-primary">
+<div class="card ">
     <div class="card-header">
       <p class="card-title"><h3><b>Products Form</b></h3></p>
+      <a href="{{route('p_index')}}"><button type="submit" class="btn btn-info"> Products list</button></a>
     </div>
     <!-- /.card-header -->
     <!-- form start -->

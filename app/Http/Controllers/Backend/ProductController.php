@@ -73,7 +73,7 @@ class ProductController extends Controller
         $products = Product::find($id);
 
         if($products){
-            return view('backend.product.show',compact('products'));
+            return view('backend.product.show', compact('products'));
             response()->session()->flash('success',"Product found");
         }else{
             response()->session()->flash('error', "Product not found");
@@ -95,7 +95,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         $products = Product::find($id);
+   
 
         if($request->hasFile('image')){
             $path = 'assets/backend/product/'. $products->image;
@@ -109,7 +111,7 @@ class ProductController extends Controller
             $file->move('assets/backend/product/',$fileName);
             $products->image = $fileName;
            }
-            $products->cate_id = $request->input('cate_id');
+            $products->cate_id = $request->input('category_id');
             $products->name = $request->input('name');
             $products->slug = $request->input('slug');
             $products->small_description = $request->input('small_descripiton');
@@ -126,6 +128,8 @@ class ProductController extends Controller
             $products->meta_descrip	 = $request->input('meta_descrip');
     
             $products->meta_keywords = $request->input('meta_keywords');
+
+        
     
             $products->update();
 

@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+use Illuminate\Support\Facades\File;
+use  Illuminate\Support\Str;
+
+
 
 class CategoryController extends Controller
 {
@@ -28,8 +33,10 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
+      
+          
         $categories = new Category();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -40,10 +47,10 @@ class CategoryController extends Controller
         }
 
         $categories->name = $request->input('name');
-        $categories->slug = $request->input('slug');
+        $categories->slug = str::slug($request->name);
         $categories->description = $request->input('description');
-        $categories->status = $request->input('status')  == True ? '1': '0';
-        $categories->popular = $request->input('popular') == True ? '1': '0';
+        $categories->status = $request->input('status')  == true ? '1': '0';
+        $categories->popular = $request->input('popular') == true ? '1': '0';
         $categories->meta_title = $request->input('meta_title');
         $categories->meta_descrip = $request->input('meta_descrip');
         $categories->meta_keywords = $request->input('meta_keywords');
@@ -67,7 +74,6 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $categories = Category::find($id);
-
         return view('backend.category.edit',compact('categories'));
 
     }
@@ -76,10 +82,32 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        $categories = Category::find($id);
-      
+    {        
+       
+        $categories = Category::find($id);        
+        if($request->hasFile('image')){
+            $path = 'assets/category/'. $categories->image;
+            if(File::exists($path)){
+                File::delete($path);
+            }
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $fileName = time().'.'.$extension;
+            $file->move('assets/category/', $fileName);
+            $categories->image = $fileName;
+        }   
+        $categories->name = $request->input('name');
+        $categories->slug = str::slug($request->name);
+        $categories->description = $request->input('description');
+        $categories->status = $request->input('status')  == True ? '1': '0';
+        $categories->popular = $request->input('popular') == True ? '1': '0';
+        $categories->meta_title = $request->input('meta_title');
+        $categories->meta_descrip = $request->input('meta_descrip');
+        $categories->meta_keywords = $request->input('meta_keywords');
+       
+        $categories->update();
 
+        return redirect()->route('c_index')->with('success',"Category updated successfully");
     }
 
     /**

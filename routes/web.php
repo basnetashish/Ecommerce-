@@ -64,5 +64,7 @@ Route::get('/frontend/product',[HomeController::class,'product'])->name('f_produ
 Route::get('/frontend/about',[HomeController::class,'about'])->name('f_about');
 Route::get('/frontend/testimonial',[HomeController::class,'test'])->name('f_testimonial');
 
+Route::get('/frontend/viewcategory/{slug}',[HomeController::class,'viewproduct'])->name('f_viewcategory');
+Route::get('/frontend/viewcategory/{cat_slug}/{prod_slug}',[HomeController::class,'productdetails'])->name('f_productdetails');
 
 

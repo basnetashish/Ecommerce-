@@ -90,7 +90,7 @@
       <div class="header_bottom">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/userhome">
               <span>
                 Electro
               </span>
@@ -103,7 +103,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/userhome">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{url('frontend/about')}}"> About</a>
@@ -138,7 +138,9 @@
                       Welcome to our shop
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe dolorem deserunt quo quidem ad optio.
+                   
+
+Headphones come with many technical specifications, usually located on the back of the box of the headphones.
                     </p>
                     <a href="">
                       Read More
@@ -147,7 +149,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="{{asset('assetss/frontend/images/slider-img.png')}}" alt="">
+                    <img src="{{asset('assets/frontend/images/headphone.jpg')}}" alt="">
                   </div>
                 </div>
               </div>
@@ -162,7 +164,7 @@
                       Welcome to our shop
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe dolorem deserunt quo quidem ad optio.
+                     Designed with utmost patience and craftsmanship, the Mi NoteBook 14 is so beautiful that you can't help but notice it. Weighing just 1.5kg, the sleek unibody metal chassis and an anodized sandblasted coating makes your device sturdy and gives it a svelte look.
                     </p>
                     <a href="">
                       Read More
@@ -171,7 +173,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/slider-img.png')}}" alt="">
+                    <img src="{{asset('assets/frontend/images/mi.webp')}}" alt="">
                   </div>
                 </div>
               </div>
@@ -186,7 +188,7 @@
                       Welcome to our shop
                     </h1>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste quam velit saepe dolorem deserunt quo quidem ad optio.
+                   Our most awesome Galaxy A Series device yet, with a multi-lens camera for brilliant photos and video, smooth scrolling 120Hz display, and a fast-charging battery that just keeps going.
                     </p>
                     <a href="">
                       Read More
@@ -195,7 +197,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/slider-img.png')}}" alt="">
+                    <img src="{{asset('assets/frontend/images/smartphone.jpg')}}"alt="">
                   </div>
                 </div>
               </div>
@@ -224,7 +226,7 @@
     <div class="container">
         <br>
         <div class="heading_container heading_center">
-            <h2>Products</h2>
+            <h2> Trending Products</h2>
         </div>
     
         <div class="py-5">
@@ -263,7 +265,7 @@
 <div class="container">
     <div class="heading_container heading_center">
         <br>
-        <h2>Categories</h2>
+        <h2> Popular Categories</h2>
     </div>
 
     <div class="py-5">
@@ -273,6 +275,7 @@
                     <div class="row">
                     @foreach($categories as $category)
                         <div class="col-md-4 mb-3">
+                          <a href="{{url('/frontend/viewcategory/'.$category->slug)}}">
                             <div class="card" >
                                 <img src="{{asset('/assets/category/'.$category->image)}}" height="300px"  alt="Category image">
                                 
@@ -287,6 +290,7 @@
     
                                  </div>
                             </div>
+                          </a>
                         </div>
                         @endforeach
                     </div>
@@ -302,7 +306,11 @@
   <!-- end product section -->
 
   <!-- about section -->
-
+  <div class="heading_container heading_center">
+    <br>
+    <h2>About Us </h2>
+    <br>
+  </div>
   <section class="about_section" style="background-color:#938ba1">
     <div class="container-fluid  ">
       <div class="row">
@@ -314,9 +322,7 @@
               </h2>
             </div>
             <p>
-              Totam architecto rem beatae veniam, cum officiis adipisci soluta perspiciatis ipsa, expedita maiores quae accusantium. Animi veniam aperiam, necessitatibus mollitia ipsum id optio ipsa odio ab facilis sit labore officia!
-              Repellat expedita, deserunt eum soluta rem culpa. Aut, necessitatibus cumque. Voluptas consequuntur vitae aperiam animi sint earum, ex unde cupiditate, molestias dolore quos quas possimus eveniet facilis magnam? Vero, dicta.
-            </p>
+              Electro Wordpress theme is a WooCommerce WordPress theme designed and developed for use with WordPress 4.8 or higher. The code was written to be backwards compatible where possible, however we recommend you use the current WP version when possible. If you are not using WordPress 4.8 or higher and can upgrade your site we recommend you do this before installation.
             <a href="">
               Read More
             </a>
@@ -335,7 +341,7 @@
 
 
   <!-- client section -->
-
+<br>
   <section class="client_section layout_padding-bottom">
     <div class="container">
       <div class="heading_container heading_center">

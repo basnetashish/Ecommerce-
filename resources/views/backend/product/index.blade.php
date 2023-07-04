@@ -29,7 +29,7 @@
               <tr>
                 <th>Category </th>
                 <th>Product Name</th>
-                {{-- <th>Slug</th> --}}
+                <th>Slug</th>
                 {{-- <th>Small Description</th>
                 <th>Description</th> --}}
                 <th>Orginal Price</th>
@@ -49,9 +49,9 @@
               @foreach($Products as $product)
                <td>{{$product->category->name}}</td>
               <td>{{$product->name}}</td>
-              {{-- <td>{{$product->slug}}</td>
-              <td>{{$product->small_description}}</td>
-              <td>{{$product->description}}</td> --}}
+               <td>{{$product->slug}}</td>
+              {{-- <td>{{$product->small_description}}</td> --}}
+              {{-- <td>{{$product->description}}</td>  --}}
               <td>{{$product->orginal_price}}</td>
               <td>{{$product->selling_price}}</td>
               <td>

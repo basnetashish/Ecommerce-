@@ -7,7 +7,7 @@
     </div>
     <!-- /.card-header -->
     <!-- form start -->
-    <form role="form" action="{{url('/backend/category/update'.$categories->id)}}" method="PUT" enctype="multipart/form-data">
+    <form role="form" action="{{url('/backend/category/update/'.$categories->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
       <div class="card-body">
@@ -15,10 +15,7 @@
           <label for="exampleInputEmail1"> Category Name</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="name"  value="{{$categories->name}}" placeholder="Enter category name ">
         </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Slug</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="slug" value="{{$categories->slug}}" placeholder="Enter slug">
-        </div>
+       
 
         <div class="form-group">
             <label for="exampleInputPassword1">Description</label>
@@ -62,7 +59,7 @@
       <!-- /.card-body -->
 
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Update Category</button>
       </div>
     </form>
   </div>

@@ -2,6 +2,11 @@
 
 @section('content')
  
+<div class="heading_container heading_center">
+  <br>
+  <h2>About Us </h2>
+  <br>
+</div>
 <section class="about_section" style="background-color:#938ba1">
     <div class="container-fluid  ">
       <div class="row">

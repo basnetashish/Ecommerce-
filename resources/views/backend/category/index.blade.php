@@ -3,11 +3,7 @@
  
 <div class="row">
     <div class="col-12">
-      @if(session()->has('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-    </div>
-@endif
+     @include('flash-message')
       <div class="card">
         <div class="card-header">
           <h3 class="card-title"><b><h2>Category Table</h2></b></h3>
@@ -72,5 +68,14 @@
       <!-- /.card -->
     </div>
   </div>
-
+  
+@endsection
+@section('scripts')
+<script type="text/javascript"> 
+  $(function(){
+setTimeout(function(){
+    $("#flashmsg").hide();
+    }, 2000);
+  });
+</script>
 @endsection

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Backend\Product;
 use App\Models\Backend\Category;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -44,7 +45,7 @@ class ProductController extends Controller
        }
         $products->cate_id = $request->input('cate_id');
         $products->name = $request->input('name');
-        $products->slug = $request->input('slug');
+        $products->slug =str::slug($request->name);
         $products->small_description = $request->input('small_descripiton');
         $products->description = $request->input('description');
         $products->orginal_price = $request->input('original_price');
@@ -95,6 +96,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+      
         
         $products = Product::find($id);
    
@@ -113,7 +115,7 @@ class ProductController extends Controller
            }
             $products->cate_id = $request->input('category_id');
             $products->name = $request->input('name');
-            $products->slug = $request->input('slug');
+            $products->slug = str::slug($request->name);
             $products->small_description = $request->input('small_descripiton');
             $products->description = $request->input('description');
             $products->orginal_price = $request->input('original_price');

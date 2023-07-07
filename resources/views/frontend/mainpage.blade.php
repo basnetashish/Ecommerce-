@@ -12,6 +12,7 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>Minics</title>
 
@@ -38,6 +39,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@100;400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  
 </head>
 
 <body>
@@ -72,10 +75,10 @@
               <a href="" class="account-link">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span>
-                    My Account
+                    {{Auth::user()->name}}
                 </span>
               </a>
-              <a href="" class="cart-link">
+              <a href="{{url('/cart1')}}" class="cart-link {{Request::is('/cart')? 'active':''}} ">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span>
                   Cart
@@ -111,21 +114,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ">
                 <li class="nav-item {{Request::is('home')? 'active':''}}">
-                  <a class="nav-link" href="/userhome">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {{Request::is('frontend/about')? 'active':''}}">
-                  <a class="nav-link" href="{{url('frontend/about')}}"> About</a>
+                <li class="nav-item {{Request::is('/about')? 'active':''}}">
+                  <a class="nav-link" href="{{url('/about')}}"> About</a>
                 </li>
-                <li class="nav-item {{Request::is('frontend/product')? 'active':''}}">
-                  <a class="nav-link" href="{{url('frontend/product')}}">Product</a>
+                <li class="nav-item {{Request::is('/product')? 'active':''}}">
+                  <a class="nav-link" href="{{url('/product')}}">Product</a>
                 </li>
                
-                <li class="nav-item {{Request::is('frontend/category')? 'active':''}}">
-                    <a class="nav-link" href="{{url('frontend/category')}}">Category</a>
+                <li class="nav-item {{Request::is('/category')? 'active':''}}">
+                    <a class="nav-link" href="{{url('/category')}}">Category</a>
                   </li>
 
-                  <li class="nav-item {{Request::is('frontend/testimonial')? 'active':''}}">
-                    <a class="nav-link" href="{{url('frontend/testimonial')}}">Testimonial</a>
+                  <li class="nav-item {{Request::is('/testimonial')? 'active':''}}">
+                    <a class="nav-link" href="{{url('/testimonial')}}">Testimonial</a>
                   </li>
                 
               </ul>
@@ -279,7 +282,7 @@
   <script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>
   <!-- custom js -->
   <script src="{{asset('assets/frontend/js/custom.js')}}"></script>
-
+@yield('script')
 
 </body>
 

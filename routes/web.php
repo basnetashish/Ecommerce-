@@ -7,6 +7,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Middleware\Roles;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FrontController;
+use App\Http\Controllers\Backend\CartController;
+use App\Http\Controllers\Backend\OrderController;
+
+
 
 
 /*
@@ -26,14 +30,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth', 'roles'])->group(function () {
   
     Route::get('/admin', [HomeController::class, 'roles'])->name('admin');
 });
 //frontend 
-Route::get('/userhome', [HomeController::class, 'index'])->name('userhome');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 
@@ -59,12 +62,28 @@ Route::put('/backend/product/update/{id}',[ProductController::class,'update'])->
 Route::get('/show',[HomeController::class,'show'])->name('f_show');
 Route::get('/frontend/mainpage',[HomeController::class,'main'])->name('mainpage');
 
-Route::get('/frontend/category',[HomeController::class,'category'])->name('f_category');
-Route::get('/frontend/product',[HomeController::class,'product'])->name('f_product');
-Route::get('/frontend/about',[HomeController::class,'about'])->name('f_about');
-Route::get('/frontend/testimonial',[HomeController::class,'test'])->name('f_testimonial');
+Route::get('/category',[HomeController::class,'category'])->name('f_category');
+Route::get('/product',[HomeController::class,'product'])->name('f_product');
+Route::get('/about',[HomeController::class,'about'])->name('f_about');
+Route::get('/testimonial',[HomeController::class,'test'])->name('f_testimonial');
 
-Route::get('/frontend/viewcategory/{slug}',[HomeController::class,'viewproduct'])->name('f_viewcategory');
-Route::get('/frontend/viewcategory/{cat_slug}/{prod_slug}',[HomeController::class,'productdetails'])->name('f_productdetails');
+Route::get('/category/{slug}',[HomeController::class,'viewproduct'])->name('f_viewcategory');
+Route::get('category/{cat_slug}/{prod_slug}',[HomeController::class,'productdetails'])->name('f_productdetails');
+
+Route::get('/searchproduct',[HomeController::class,'searchproduct']);
+
+Route::get('/cartlist',[CartController::class,'cartindex'])->name('c_cartlist');
+Route::post('/add-to-cart',[CartController::class,'addproduct']);
+Route::post('/deletecart',[CartController::class,'deletecart']);
+Route::post('/updatecart',[CartController::class,'updatecart']);
+
+
+Route::middleware(['auth'])->group(function () {
+  Route::get('/cart1',[CartController::class,'viewcart']);
+  Route::get('/checkout',[OrderController::class,'checkout']);
+  Route::get('/store',[OrderController::class,'store']);
+  
+
+});
 
 

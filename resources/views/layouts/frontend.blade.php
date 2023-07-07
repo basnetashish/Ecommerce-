@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Minics</title>
+  <title>Electro</title>
 
 
   <!-- bootstrap core css -->
@@ -55,19 +55,23 @@
               </a>
             </div>
             <from class="search_form">
-              <input type="text" class="form-control" placeholder="Search here...">
+               <a href="{{url('/searchproduct')}}">
+              <input type="text" class="form-control" name="input" placeholder="Search here...">
+              <a href="{{url('/searchproduct')}}">
               <button class="" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
+            
+            </a>
             </from>
             <div class="user_option_box">
               <a href="" class="account-link">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span>
-                    My Account
+                  {{Auth::user()->name}}
                 </span>
               </a>
-              <a href="" class="cart-link">
+              <a href="{{url('/cart1')}}" class="cart-link">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span>
                   Cart
@@ -103,20 +107,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="/userhome">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('frontend/about')}}"> About</a>
+                  <a class="nav-link" href="{{url('/about')}}"> About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('/frontend/product')}}">Products</a>
+                  <a class="nav-link" href="{{url('/product')}}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/frontend/category')}}">Category</a>
+                    <a class="nav-link" href="{{url('/category')}}">Category</a>
                   </li>
                 
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('/frontend/testimonial')}}">Testimonial</a>
+                  <a class="nav-link" href="{{url('/testimonial')}}">Testimonial</a>
                 </li>
               </ul>
             </div>

@@ -7,7 +7,7 @@
       <div class="row justify-content-center mb-3">
         <div class="col-md-12 col-xl-10">
           <div class="card shadow-0 border rounded-3">
-            <div class="card-body">
+            <div class="card-body product_data">
               <div class="row">
                 <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
                   <div class="bg-image hover-zoom ripple rounded ripple-surface">
@@ -31,10 +31,10 @@
                      <p class="badge badge-danger">Out of stock</p>
                      @endif
                   </div>
-                  
+                    <input type="hidden" value="{{$products->id}}" class="prod_id">
                     <label for="quantity">Quantity</label>
                     <div class="d-flex">
-                      <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" min="1" max="5"  oninput="validity.valid||(value='1');" style="max-width: 4rem" />
+                      <input class="form-control text-center me-3 prod_qty" id="inputQuantity" type="number" value="1" min="1" max="5"  oninput="validity.valid||(value='1');" style="max-width: 4rem" />
                       
                   </div>
                     <br>
@@ -53,7 +53,13 @@
                   @endif
                   <br>
                   <div class="d-flex flex-column mt-3">
-                    <button class="btn btn-primary btn-sm" type="button"> <i class="fa fa-shopping-cart"></i>Add to cart</button>
+
+                    @if($products->qty>0)
+                    <button class="btn btn-primary btn-sm addtocart" data-productid="{{$products->id}}" type="button"> <i class="fa fa-shopping-cart"></i>Add to cart</button>
+                    
+                    @endif
+
+                   
                     <button class="btn btn-outline-success btn-sm mt-2" type="button"> <i class="fa fa-heart"></i>
                       Add to wishlist
                     </button>
@@ -67,5 +73,42 @@
       
     </div>
 
+
+@endsection
+
+@section('script')
+ <script>
+  $(document).ready(function() {
+    console.log('loaded')
+    $(document).on('click', '.addtocart', function() {
+
+    // e.preventDefault();
+    var product_id = $(this).data('productid');
+    // console.log('here', product_id)
+    var product_qty = $(this).closest('.product_data').find('.prod_qty').val();
+
+    //   alert(product_id);
+    // alert(product_qty);
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+     $.ajax({
+          type:"post",
+          url: "/add-to-cart",
+          data: {
+            'prod_id': product_id,
+            'prod_qty': product_qty,
+          },
+          
+          success: function(response){
+              alert(response.status);
+          }
+     });
+  });
+}); 
+ </script>
 
 @endsection

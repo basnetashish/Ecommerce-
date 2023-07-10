@@ -54,16 +54,16 @@
                 </span>
               </a>
             </div>
-            <from class="search_form">
-               <a href="{{url('/searchproduct')}}">
+            <p class="search_form">
+             
               <input type="text" class="form-control" name="input" placeholder="Search here...">
-              <a href="{{url('/searchproduct')}}">
+                <a href="{{url('/searchproduct')}}">
               <button class="" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
-            
             </a>
-            </from>
+         
+            </p>
             <div class="user_option_box">
               <a href="" class="account-link">
                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -117,6 +117,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/category')}}">Category</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url('/placeorder')}}">My Orders</a>
                   </li>
                 
                 <li class="nav-item">
@@ -239,11 +242,10 @@ Headphones come with many technical specifications, usually located on the back 
                     <div class="col-md-12">
                         <div class="row">
                         @foreach($products as $product)
-                            <div class="col-md-4">
+                            <div class="col-md-4 mb-3">
                                 <div class="card">
-                                    <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px" alt="products image">
-                                    
-                                     <div class="card-body">
+                                    <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px"  alt="products image">
+                                    <div class="card-body">
                                       <h5>
                                         {{$product->name}}
                                     </h5>
@@ -506,12 +508,12 @@ Headphones come with many technical specifications, usually located on the back 
               Information
             </h5>
             <p>
-              Eligendi sunt, provident, debitis nemo, facilis cupiditate velit libero dolorum aperiam enim nulla iste maxime corrupti ad illo libero minus.
+              Ecommerce website is your digital storefront on the internet. It facilitates the transaction between a buyer and seller. It is the virtual space where you showcase products, and online customers make selections
             </p>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="info_links">
+          <div class="info_links  " style="margin-left: 120px">
             <h5>
               Useful Link
             </h5>

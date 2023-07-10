@@ -196,30 +196,35 @@
             </p>
           </div>
         </div>
-        <div class="col-md-3">
-          <div class="info_info">
+        <div class="col">
+          <div class="info_info" style="margin-left:70px">
             <h5>
               Information
             </h5>
             <p>
-              Eligendi sunt, provident, debitis nemo, facilis cupiditate velit libero dolorum aperiam enim nulla iste maxime corrupti ad illo libero minus.
+              Ecommerce website is your digital storefront on the internet. It facilitates the transaction between a buyer and seller. It is the virtual space where you showcase products, and online customers make selections
             </p>
           </div>
         </div>
         <div class="col-md-3">
-          <div class="info_links">
+          <div class="info_links" style=" margin-left:120px">
             <h5>
               Useful Link
             </h5>
             <ul>
               <li>
-                <a href="#">
+                <a href="{{URL('/homeq')}}">
                   Home
                 </a>
               </li>
               <li>
                 <a href="{{url('frontend/about')}}">
                   About
+                </a>
+              </li>
+              <li>
+                <a href="{{url('frontend/category')}}">
+                  My Orders
                 </a>
               </li>
               <li>
@@ -232,6 +237,7 @@
                   Category
                 </a>
               </li>
+            
               <li>
                 <a href="{{asset('frontend/testimonial')}}">
                   Testimonial
@@ -241,7 +247,7 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="info_form ">
+          <div class="info_form " >
            
             <div class="social_box">
               <a href="">

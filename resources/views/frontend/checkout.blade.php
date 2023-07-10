@@ -14,7 +14,7 @@
                     <h6>Details</h6>
                 </div>
                 <div class="card-body">
-                    <form role="form" action="" method="POST" enctype="multipart/form-data" >
+                    <form role="form" action="{{url('/orderstore')}}" method="POST" enctype="multipart/form-data" >
                         @csrf
                       
                         <div class="form-group">

@@ -76,13 +76,15 @@ Route::get('/cartlist',[CartController::class,'cartindex'])->name('c_cartlist');
 Route::post('/add-to-cart',[CartController::class,'addproduct']);
 Route::post('/deletecart',[CartController::class,'deletecart']);
 Route::post('/updatecart',[CartController::class,'updatecart']);
+Route::post('/orderstore',[OrderController::class,'orderstore']);
 
 
 Route::middleware(['auth'])->group(function () {
   Route::get('/cart1',[CartController::class,'viewcart']);
   Route::get('/checkout',[OrderController::class,'checkout']);
   Route::get('/store',[OrderController::class,'store']);
-  
+  Route::get('/placeorder',[OrderController::class,'placeorder'])->name('f_placeorder');
+  Route::get('/orderdetails/{id}',[OrderController::class,'orderdetails']);
 
 });
 

@@ -93,8 +93,14 @@ class HomeController extends Controller
    }
     public function searchproduct(Request $request)
     {
-        $query = $request->input('input');
-        $results = Product::where('name', 'like', '%' . $query . '%')->get();
-        return view('frontend.search', ['results' => $results]);
+        dd($request);
+       $query = $request->input('input'); 
+       if($query){
+        $result = Product::where('name','LIKE','%'.$query.'%')->get();
+        return view('frontend.search');
+
+
+       }
+      
     }
 }

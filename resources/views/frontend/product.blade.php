@@ -3,7 +3,10 @@
 @section('content')
 
 
+
+
 <div class="container">
+    
     <br>
     <div class="heading_container heading_center">
         <h2> Products</h2>
@@ -16,7 +19,9 @@
                     <div class="row">
                     @foreach($products as $product)
                         <div class="col-md-4 mb-3">
+                            <a href="{{url('products/'.$product->slug)}}">
                             <div class="card">
+                                
                                 <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px" alt="products image">
                                 
                                  <div class="card-body">
@@ -30,6 +35,7 @@
 
                                  </div>
                             </div>
+                            </a>
                         </div>
                         @endforeach
                     </div>

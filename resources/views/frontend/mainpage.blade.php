@@ -13,7 +13,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
+ 
   <title>Minics</title>
 
 
@@ -40,6 +40,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@100;400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
+
+
   
 </head>
 
@@ -65,34 +67,51 @@
                 </span>
               </a>
             </div>
-            <from class="search_form">
-              <input type="text" class="form-control" placeholder="Search here...">
+            <form class="search_form" action="{{url('/product')}}" method="get">
+             
+              <input type="text" class="form-control" name="input" placeholder="Search here...">
+                <a href="">
               <button class="" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
-            </from>
-            <div class="user_option_box">
-              <a href="" class="account-link">
+            </a>
+         
+          </form>
+            <div class="user_option_box" style="margin-right:30px">
+               @if(Auth::check())
+               <a href="" class="account-link">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <span>
                     {{Auth::user()->name}}
                 </span>
               </a>
-              <a href="{{url('/cart1')}}" class="cart-link {{Request::is('/cart')? 'active':''}} ">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <span>
-                  Cart
-                </span>
-              </a>
+
               <a class="" href="{{ route('logout') }}"
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
+                             <i class="fa fa-sign-out"  style="color: #f4e00b;"></i>
                {{ __('Logout') }}
            </a>
 
            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                @csrf
            </form>
+              @else
+              <a href="{{url('/login')}}" class="account-link">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>
+                    Login
+                </span>
+              </a>
+              @endif
+              <a href="{{ url('/cart1') }}" class="cart-link" id="cartLink">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span>Cart</span>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info cart-count">
+                  
+                </span> 
+              </a>
+           
             </div>
           </div>
 
@@ -101,7 +120,7 @@
       <div class="header_bottom">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
-            <a class="navbar-brand" href="/userhome">
+            <a class="navbar-brand" href="/">
               <span>
                 Electro
               </span>
@@ -113,23 +132,31 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ">
-                <li class="nav-item {{Request::is('home')? 'active':''}}">
-                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item {{Request::is('/about')? 'active':''}}">
-                  <a class="nav-link" href="{{url('/about')}}"> About</a>
+                <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/about') }}">About</a>
                 </li>
-                <li class="nav-item {{Request::is('/product')? 'active':''}}">
-                  <a class="nav-link" href="{{url('/product')}}">Product</a>
+                <li class="nav-item {{ Request::is('product') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/product') }}">Product</a>
                 </li>
-               
-                <li class="nav-item {{Request::is('/category')? 'active':''}}">
-                    <a class="nav-link" href="{{url('/category')}}">Category</a>
-                  </li>
+                <li class="nav-item {{ Request::is('category') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/category') }}">Category</a>
+                </li>
+                <li class="nav-item {{ Request::is('placeorder') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/placeorder') }}">My Orders</a>
+                </li>
+                <li class="nav-item {{ Request::is('wishlist') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/wishlist') }}">Wishlist
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info count-wishlist">
+                      
+                    </span> 
+                  </a>
+                  
+                </li>
 
-                  <li class="nav-item {{Request::is('/testimonial')? 'active':''}}">
-                    <a class="nav-link" href="{{url('/testimonial')}}">Testimonial</a>
-                  </li>
+                  
                 
               </ul>
             </div>
@@ -139,6 +166,8 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
+    
+     
   @yield('content')
     
     <!-- end slider section -->
@@ -213,36 +242,34 @@
             </h5>
             <ul>
               <li>
-                <a href="{{URL('/homeq')}}">
+                <a href="{{url('/')}}">
                   Home
                 </a>
               </li>
               <li>
-                <a href="{{url('frontend/about')}}">
+                <a href="{{url('/about')}}">
                   About
                 </a>
               </li>
+              
+              
               <li>
-                <a href="{{url('frontend/category')}}">
-                  My Orders
-                </a>
-              </li>
-              <li>
-                <a href="{{url('frontend/product')}}">
+                <a href="{{url('/product')}}">
                   Products
                 </a>
               </li>
               <li>
-                <a href="{{url('frontend/category')}}">
+                <a href="{{url('/category')}}">
                   Category
                 </a>
               </li>
             
               <li>
-                <a href="{{asset('frontend/testimonial')}}">
-                  Testimonial
+                <a href="{{asset('/testimonial')}}">
+                 Testimonial
                 </a>
               </li>
+              
             </ul>
           </div>
         </div>
@@ -288,8 +315,21 @@
   <script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>
   <!-- custom js -->
   <script src="{{asset('assets/frontend/js/custom.js')}}"></script>
+  {{-- //sweetmessage --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if(Session('status'))
+
+    <script>
+      swal("{{Session('status')}}");
+    </script>
+
+    @endif
+
 @yield('script')
 
 </body>
 
 </html>
+  
+

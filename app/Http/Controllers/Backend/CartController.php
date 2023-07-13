@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Backend\Cart;
 use App\Models\Backend\Product;
+use App\Models\Backend\Wishlist;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +28,14 @@ class CartController extends Controller
             $cart->user_id = Auth::id();
             $cart->prod_qty  = $product_qty;
             $cart->save();
+            
+            $wishlists = Wishlist::where('prod_id',$product_id)->where('user_id',Auth::id())->first();
+            $wishlists->delete();
            return  response()->json(['status' => $product_check->name. " added to cart successfully"]);
             }
         }
         }else{
-            return  response()->json(['status' =>  " Please login to add product in cart"]);
+            return  redirect('/login')->with('error',"login required");
         }
     }
 
@@ -89,5 +93,10 @@ class CartController extends Controller
         {
             $carts = Cart::all();
             return view('backend.cartlist',compact('carts'));
+        }
+
+        public function cartcount(){
+            $cartcount = Cart::where('user_id',Auth::id())->count();
+             return response()->json(['count'=>$cartcount]);
         }
 }

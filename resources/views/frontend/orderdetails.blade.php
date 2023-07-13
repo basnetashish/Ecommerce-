@@ -1,81 +1,99 @@
 @extends('frontend.mainpage')
 
 @section('content')
+<div class="bg-warning">
+  <div class="container py-2" style="font-family: 'Lato', sans-serif;">
+    <!-- Breadcrumb -->
+    <nav class="d-flex">
+      <h6 class="  mb-0">
+        <a href="{{url('/home')}}" class="text-hover">Home</a>
+        <span class="text-white-50 mx-2"> > </span>
+        <a href="{{url('/category')}}" class="text-hover">Category</a>
+        <span class="text-white-50 mx-2"> > </span>
+        <a href="{{url('/cart1')}}" class="text-hover">Cart</a>
+        <span class="text-white-50 mx-2"> > </span>
+        <a href="{{url('/placeorder')}}" class="text-hover">My Orders</a>
 
-<section style="background-color:#eee; min-height: 100vh;">
-    <div class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6 col-xl-4 mx-auto" style="margin-left: auto; margin-right: 0;">
-          <div class="card" style="border-radius: 15px; height: 80vh; width: 30vw;">
-            <div class="bg-image hover-overlay ripple ripple-surface ripple-surface-light"
-              data-mdb-ripple-color="light">
-            
-          
-              
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/12.webp"
-                style="border-top-left-radius: 15px; border-top-right-radius: 15px;" class="img-fluid"
-                alt="Laptop" />
+      </h6>
+    </nav>
+    <!-- Breadcrumb -->
+  </div>
+</div>
+<section style="background-color:#eee; min-height: 80vh;">
+  <div class="container py-5">
+    @foreach($orders as $order)
+    @foreach($order->orderItems as $item)
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-4 mx-auto" style="margin-left: auto; margin-right: 0;">
+        <div class="card" style="border-radius: 15px; height: 88vh; width: 30vw;  margin-bottom: 20px;">
+          <div class="bg-color">
+          <img src="{{asset('assets/backend/product/'.$item->Products->image)}}"
+                style="height:300px;  margin-left:20%; margin-top:20px; " class=" "
+                alt="product" />
+         
               <a href="#!">
                 <div class="mask"></div>
               </a>
-            </div>
-            <div class="row">
-                <div class="col-12 d-flex justify-content-center text-center">
-                  <h5> <b>Customer Details</b></h5>
-                </div>
-            </div>
-        
-            <div class="card-body pb-0">
-              <div class="d-flex justify-content-between">
-                <div>
-                     
-                  {{-- <p> <i class="fa fa-user" aria-hidden="true"></i> {{$order->name}}</p>
-                  <p><i class="fa fa-envelope"></i> {{$order->email}}</p>
-                  <p><i class="fa fa-location-dot"></i> {{$order->address}}</p> --}}
-                 
-                </div>
-                <div>
-                 
-                 {{-- <p><i class="fa fa-phone"> {{$order->phone}}</i></p> --}}
-                </div>
-              </div>
-            </div>
-            <hr class="my-0" />
-            <div class="card-body pb-0">
-                <div class="row">
-                    <div class="col-12 d-flex justify-content-center text-center">
-                      <h5> <b>Product Details</b></h5>
-                    </div>
-                </div>
-              <div class="d-flex justify-content-between">
-                {{-- <p> Id: <b>{{$order->tracking_no}}</b> </p> --}}
-               
-                {{-- @if($order->status == 0)
-                <p class="text-danger">Pending</p>
-                @else
-                <p class="text-success">Complete</p>
-                @endif --}}
-              </div>
-              <p> 
-                {{-- @foreach($order->orderItems as $item)
-                Rs.{{$item->price}}
-                
-            @endforeach --}}
-            </p>
-              <p class="small text-muted">VISA Platinum</p>
-            </div>
-            <hr class="my-0" />
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
-                <a href="#!" class="text-dark fw-bold">Cancel</a>
-                <button type="button" class="btn btn-primary">Buy now</button>
-
-              </div>
-            
-            </div>
           </div>
-        </div>
+              
+                 <div class="card-body pb-0">
+                  <div class="d-flex justify-content-between">
+                  <div>
+                      <p> <i class="fa fa-user" aria-hidden="true"></i> {{$order->name}}</p>
+                      <p><i class="fa fa-envelope"></i> {{$order->email}}</p>
+                      <p><i class="fa fa-location-dot"></i> {{$order->address}}</p>
+                    </div>
+                    <div>
+                        <p><i class="fa fa-phone"> {{$order->phone}}</i></p>
+                    </div>
+                  </div>
+                 </div>
+                 
+                 <div class="card-body " >
+                  <div class="d-flex justify-content-between" style="margin-top:-10%;">
+                  <div >
+                    
+                    <p> Tracking No: <b>{{$order->tracking_no}}</b></p>
+                          
+                      <h6 >{{$item->Products->name}}</h6>
+                      <p>Quantity: {{$item->qty}}</p>
+                      <p >
+                        Price:  {{$item->Products->selling_price}}
+                       </p>
+                      
+                     
+                 
+                    </div>
+                    <div>
+                        <p style="margin-left:80px;">
+                          @if($order->status == 0)
+                          <span class="badge badge-danger">Pending</span>
+                      @else
+                          <span class="badge badge-success">Completed</span>
+                      @endif
+                        </p> 
+                      <p style="margin-top: 120px;"> <b> Total Price: {{$item->price}}</b></p>
+                    
+                      <a href="{{url('/category')}}" > <b>Continue Shopping </b></a>
+                    </div>
+                  </div>
+                 </div>
+              </div>           
       </div>
     </div>
-  </section>
+    @endforeach
+    @endforeach
+  </div>
+
+</section>
+<style>
+  .text-hover{
+      color:white;
+  }
+  .text-hover:hover {
+
+color:white;
+font-weight: bold;
+}
+</style>
 @endsection

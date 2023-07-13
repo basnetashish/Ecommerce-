@@ -9,6 +9,8 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FrontController;
 use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -24,9 +26,13 @@ use App\Http\Controllers\Backend\OrderController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+
+Route::get('/', [UserController::class, 'index'])->name('home1');
 
 Auth::routes();
 
@@ -34,14 +40,9 @@ Auth::routes();
 Route::middleware(['auth', 'roles'])->group(function () {
   
     Route::get('/admin', [HomeController::class, 'roles'])->name('admin');
-});
-//frontend 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-
-
-//Category
-Route::get('/backend/category/create',[CategoryController::class,'create'])->name('c_create');
+    
+    //
+    Route::get('/backend/category/create',[CategoryController::class,'create'])->name('c_create');
 Route::get('/backend/category/index',[CategoryController::class,'index'])->name('c_index');
 Route::post('/backend/category/store',[CategoryController::class,'store'])->name('c_store');
 Route::get('/backend/category/delete/{id}',[CategoryController::class,'destroy'])->name('c_delete');
@@ -57,34 +58,56 @@ Route::get('backend/product/show/{id}',[ProductController::class,'show'])->name(
 Route::get('/backend/product/edit/{id}',[ProductController::class,'edit'])->name('p_edit');
 Route::put('/backend/product/update/{id}',[ProductController::class,'update'])->name('p_update');
 
+Route::get('/order-list',[OrderController::class,'adminorderlist'])->name('order_list');
+Route::get('/order-edit/{id}',[OrderController::class,'adminorderedit'])->name('order_edit');
+Route::put('/order-update/{id}',[OrderController::class,'orderupdate']);
+
+
+});
+//frontend 
+//Category
+
+
 
 //frontend
 Route::get('/show',[HomeController::class,'show'])->name('f_show');
-Route::get('/frontend/mainpage',[HomeController::class,'main'])->name('mainpage');
+Route::get('/frontend/mainpage',[ UserController::class,'main'])->name('mainpage');
 
-Route::get('/category',[HomeController::class,'category'])->name('f_category');
-Route::get('/product',[HomeController::class,'product'])->name('f_product');
-Route::get('/about',[HomeController::class,'about'])->name('f_about');
-Route::get('/testimonial',[HomeController::class,'test'])->name('f_testimonial');
+Route::get('/category',[UserController::class,'category'])->name('f_category');
+Route::get('/product',[UserController::class,'product'])->name('f_product');
+Route::get('/about',[UserController::class,'about'])->name('f_about');
+Route::get('/testimonial',[UserController::class,'test'])->name('f_testimonial');
 
-Route::get('/category/{slug}',[HomeController::class,'viewproduct'])->name('f_viewcategory');
-Route::get('category/{cat_slug}/{prod_slug}',[HomeController::class,'productdetails'])->name('f_productdetails');
+Route::get('/category/{slug}',[UserController::class,'viewproduct'])->name('f_viewcategory');
+Route::get('products/{prod_slug}',[UserController::class,'productdetails'])->name('f_productdetails');
 
-Route::get('/searchproduct',[HomeController::class,'searchproduct']);
 
-Route::get('/cartlist',[CartController::class,'cartindex'])->name('c_cartlist');
-Route::post('/add-to-cart',[CartController::class,'addproduct']);
-Route::post('/deletecart',[CartController::class,'deletecart']);
-Route::post('/updatecart',[CartController::class,'updatecart']);
-Route::post('/orderstore',[OrderController::class,'orderstore']);
+
+
+
+
 
 
 Route::middleware(['auth'])->group(function () {
   Route::get('/cart1',[CartController::class,'viewcart']);
+  Route::get('/count-cart',[CartController::class,'cartcount']);
+  Route::get('/cartlist',[CartController::class,'cartindex'])->name('c_cartlist');
+  Route::post('/add-to-cart',[CartController::class,'addproduct']);
+  Route::post('/deletecart',[CartController::class,'deletecart']);
+  Route::post('/updatecart',[CartController::class,'updatecart']);
+  Route::post('/orderstore',[OrderController::class,'orderstore']);
   Route::get('/checkout',[OrderController::class,'checkout']);
   Route::get('/store',[OrderController::class,'store']);
   Route::get('/placeorder',[OrderController::class,'placeorder'])->name('f_placeorder');
   Route::get('/orderdetails/{id}',[OrderController::class,'orderdetails']);
+
+  //wishlist
+  Route::get('/wishlist',[WishlistController::class,'index']);
+ Route::get('/count-wishlist',[WishlistController::class,'countwishlist']);
+  Route::post('/add-wishlist',[WishlistController::class,'addwishlist']);
+  Route::delete('/delete-wishlist',[WishlistController::class,'deletewishlist']);
+  Route::put('/update-wishlist',[WishlistController::class,'updatewishlist']);
+  
 
 });
 

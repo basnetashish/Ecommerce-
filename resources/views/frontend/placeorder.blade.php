@@ -12,7 +12,7 @@
               
          </div>
         
-         <i class="fas fa-truck fa-4x"></i>
+         <i class="fas fa-truck fa-4x" style="color: orange"></i>
            
 
        </div>
@@ -55,16 +55,22 @@
 
                                         <td>{{$order->tracking_no}}</td>
                                         <td >
-                                            @if($order->status == 0)
+                                        @if($order->status == 0)
                                             <span class="badge badge-danger">Pending</span>
                                         @else
                                             <span class="badge badge-success">Completed</span>
                                         @endif
                                         </td>
                                         <td>
+                                            <?php   $totprice =0; ?>
                                             @foreach($order->orderItems as $item)
-                                            {{$item->price}}
+                                            @if($order->id == $item->order_id)
+                                                <?php
+                                                $totprice += $item->price;
+                                                ?>
+                                            @endif
                                         @endforeach
+                                          <p>{{$totprice}}</p>
                                         </td>
                                         
                                         <td>

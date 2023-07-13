@@ -31,22 +31,23 @@
                 <th>User Name </th>
                 <th>Product Name</th>
                 <th>Product Quantity</th>
-                <th>Action</th>
+                {{-- <th>Action</th> --}}
               </tr>
             </thead>
             <tbody>
               @foreach($carts as $cart)
                 <td>{{$cart->user_id}}</td>
-               <td>{{$cart->Users->name}}</td>
+                
+                <td>{{ $cart->Users ? $cart->Users->name : 'User Not Found' }}</td>
               <td>{{$cart->Products->name}}</td>
                <td>{{$cart->prod_qty}}</td>
               
-              <td>
+              {{-- <td>
                 <a href="#"> <button type="submit" class="btn btn-info">show</button></a>
                 <a href="#"> <button type="submit" class="btn btn-warning">Edit</button></a>
               <a href="#"> <button type="submit" class="btn btn-danger">Delete</button></a>
              
-              </td>
+              </td> --}}
 
              
 

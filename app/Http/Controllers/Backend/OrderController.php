@@ -76,12 +76,41 @@ class OrderController extends Controller
 
    public function orderdetails($id)
 {
-    $orders = Order::where('id', $id)->where('user_id', Auth::id())->first();
+    $orders = Order::where('id', $id)->where('user_id', Auth::id())->get();
 
     if ($orders) {
         return view('frontend.orderdetails', compact('orders'));
     } else {
         return view('frontend.placeorder')->with('error',"Order not found");
     }
+}
+
+public function adminorderlist()
+{
+    $orders = Order::all();
+    return  view('backend.orderlist',compact('orders'));
+}
+
+public function adminorderedit($id)
+{
+     $orders = Order::find($id);
+     return view('backend.orderedit',compact('orders'));
+}
+
+public function orderupdate(Request $request , String $id)
+{
+   $orders = Order::find($id);
+
+   $orders->name = $request->input('name');
+   $orders->email = $request->input('email');
+   $orders->address = $request->input('address');
+   $orders->phone  = $request->input('phone');
+   $orders->status = $request->input('status') == true ? '1':'0';;
+//    $orders->tracking_no = $request->input('tracking');
+
+   $orders->update();
+
+   return  redirect()->route('order_list')->with('success',"Orders Status updated successfully");
+
 }
 }

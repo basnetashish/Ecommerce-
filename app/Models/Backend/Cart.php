@@ -11,7 +11,11 @@ class Cart extends Model
 {
     use HasFactory;
     protected $table='carts';
-    protected $fillable =['user_id','prod_id','prod_qty'];
+    protected $fillable =[
+        'user_id',
+        'prod_id',
+        'prod_qty'
+    ];
 
     public function  Products()
     {
@@ -20,6 +24,6 @@ class Cart extends Model
 
     public function  Users()
     {
-        return $this->belongsTo(User::class , 'user_id','id');
+        return $this->belongsTo(User::class ,'user_id','id');
     }
 }

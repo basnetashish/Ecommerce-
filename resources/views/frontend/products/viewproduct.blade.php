@@ -18,14 +18,14 @@
       </div>
 <br>
     @else
-    <div class="py-5">
+    <div class="py-5 min-height: 100vh;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
                     @foreach($products as $product)
                         <div class="col-md-4">
-                            <a href="{{url('category/'.$categories->slug.'/'.$product->slug)}}">
+                            <a href="{{url('products/'.$product->slug)}}">
                             <div class="card">
                                 <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px" alt="products image">
                                 

@@ -24,8 +24,10 @@ class Roles
                 return $next($request);
             } 
             if($user->roles == 'user'){
-                return redirect()->route('/home');
+                return redirect()->route('home1');
             }
+        }else{
+            return redirect()->route('home1');
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models\Backend;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Backend\Order_items;
+use App\Models\Backend\Product;
 
 class Order extends Model
 {

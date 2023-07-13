@@ -37,6 +37,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        
     }
 
     protected function login(Request $request){
@@ -59,11 +60,11 @@ class LoginController extends Controller
                             break;
 
                          case 'user':
-                            return redirect()->route('home');
+                            return redirect()->route('home1');
                             break;
                          default:
                             Auth()->logout();
-                            return redirect('/login');
+                            return redirect('/home1');
 
                     }
                     

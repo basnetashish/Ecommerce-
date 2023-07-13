@@ -54,38 +54,58 @@
                 </span>
               </a>
             </div>
-            <p class="search_form">
+            <form class="search_form" action="{{url('/product')}}" method="get">
              
               <input type="text" class="form-control" name="input" placeholder="Search here...">
-                <a href="{{url('/searchproduct')}}">
+                <a href="">
               <button class="" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
             </a>
          
-            </p>
+          </form>
             <div class="user_option_box">
-              <a href="" class="account-link">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <span>
-                  {{Auth::user()->name}}
-                </span>
-              </a>
-              <a href="{{url('/cart1')}}" class="cart-link">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <span>
-                  Cart
-                </span>
-              </a>
-              <a class="" href="{{ route('logout') }}"
+             @if(Auth::check())
+             <a href="" class="account-link">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span>
+                {{Auth::user()->name}}
+              </span>
+            </a>
+
+            <a class="" href="{{ route('logout') }}"
+            
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
+                             <i class="fa fa-sign-out"  style="color: #f4e00b;" aria-hidden="true"></i>
                {{ __('Logout') }}
            </a>
-
+          
            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                @csrf
            </form>
+            @else
+              <a href="{{url('/login')}}" class="account-link">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span>
+                 Login
+                </span>
+              </a>
+
+            
+            @endif
+            
+            <a href="{{url('/cart1')}}" class="cart-link {{ Request::is('cart1') ? 'active' : '' }}">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <span>
+                Cart
+              </span>
+              @if(Auth::check())
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info cart-count">
+                 @endif 
+              </span> 
+            </a>
+              
             </div>
           </div>
 
@@ -106,25 +126,31 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{url('/about')}}"> About</a>
+                <li class="nav-item {{ Request::is('about') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/about') }}">About</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{url('/product')}}">Products</a>
+                <li class="nav-item {{ Request::is('product') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/product') }}">Product</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url('/category')}}">Category</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{url('/placeorder')}}">My Orders</a>
-                  </li>
-                
-                <li class="nav-item">
-                  <a class="nav-link" href="{{url('/testimonial')}}">Testimonial</a>
+                <li class="nav-item {{ Request::is('category') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/category') }}">Category</a>
                 </li>
+                <li class="nav-item {{ Request::is('placeorder') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/placeorder') }}">My Orders</a>
+                </li>
+                <li class="nav-item {{ Request::is('wishlist') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/wishlist') }}">Wishlist
+                  @if(Auth::id())
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info count-wishlist">
+                    @endif
+                  </span> 
+                </a>
+                </li>
+
+               
               </ul>
             </div>
           </nav>
@@ -243,6 +269,7 @@ Headphones come with many technical specifications, usually located on the back 
                         <div class="row">
                         @foreach($products as $product)
                             <div class="col-md-4 mb-3">
+                              <a href="{{url('products/'.$product->slug)}}">
                                 <div class="card">
                                     <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px"  alt="products image">
                                     <div class="card-body">
@@ -256,6 +283,7 @@ Headphones come with many technical specifications, usually located on the back 
     
                                      </div>
                                 </div>
+                              </a>
                             </div>
                             @endforeach
                         </div>
@@ -281,7 +309,7 @@ Headphones come with many technical specifications, usually located on the back 
                     <div class="row">
                     @foreach($categories as $category)
                         <div class="col-md-4 mb-3">
-                          <a href="{{url('/frontend/viewcategory/'.$category->slug)}}">
+                          <a href="{{url('/category/'.$category->slug)}}">
                             <div class="card" >
                                 <img src="{{asset('/assets/category/'.$category->image)}}" height="300px"  alt="Category image">
                                 
@@ -524,18 +552,23 @@ Headphones come with many technical specifications, usually located on the back 
                 </a>
               </li>
               <li>
-                <a href="{{url('/frontend/about')}}">
+                <a href="{{url('/about')}}">
                   About
                 </a>
               </li>
               <li>
-                <a href="{{url('/frontend/product')}}">
+                <a href="{{url('/product')}}">
                   Products
+                </a>
+              </li>
+              <li>
+                <a href="{{url('/category')}}">
+                  Category
                 </a>
               </li>
              
               <li>
-                <a href="{{url('/frontend/testimonial')}}">
+                <a href="{{url('/testimonial')}}">
                   Testimonial
                 </a>
               </li>
@@ -589,3 +622,7 @@ Headphones come with many technical specifications, usually located on the back 
 </body>
 
 </html>
+
+
+
+

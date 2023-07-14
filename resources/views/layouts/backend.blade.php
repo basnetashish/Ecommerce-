@@ -33,6 +33,22 @@
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
+         
+
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge notification">0
+              <ul class="dropdown-menu">
+
+                {{-- @foreach($user->notifications as $notification)
+
+                <li>{{$notification->data['tracking_no']}} order added</li>
+                @endforeach --}}
+              </ul>
+            </span>
+          </a>
+        </li>
         <a class="dropdown-item" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">

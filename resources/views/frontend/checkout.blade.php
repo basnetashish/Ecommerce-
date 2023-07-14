@@ -1,6 +1,12 @@
 @extends('frontend.mainpage')
 @section('content')
 
+@if(Session::has('error'))
+    <div class="alert alert-danger">
+        {{Session::get('error')}}
+    </div>
+@endif
+
 <div class="container py-4" style="font-family: 'Lato', sans-serif;">
     <div class="title text-center">
         <h2>Check Out </h2>

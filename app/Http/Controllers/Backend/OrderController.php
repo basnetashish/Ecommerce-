@@ -9,7 +9,12 @@ use App\Models\Backend\Cart;
 use App\Models\Backend\Product;
 use App\Models\Backend\Order_items;
 use Illuminate\Support\Facades\Auth;
+use Exception;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Notifications\OrderNotification;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
@@ -31,39 +36,51 @@ class OrderController extends Controller
 
     public function orderstore(Request $request)
     {
-       
-       $orders = new Order();
-       $orders->user_id = Auth::id(); 
-       $orders->name = $request->input('name');
-       $orders->email = $request->input('email');
-       $orders->address = $request->input('address');
-       $orders->phone = $request->input('phone');
-       $orders->tracking_no = 'order'.rand(1111,9999);
+  
+        try {
+            DB::beginTransaction();
+            $order= Order::create([
+                    'user_id' =>Auth::id(),
+                    'name' => $request->input('name'),
+                    'email'=> $request->input('email'),
+                    'address' => $request->input('address'),
+                    'phone' => $request->input('phone'),
+                    'tracking_no' => 'order'. rand(1111,9999)
 
-       $orders->save();
-       
-
-        $carts = Cart::where('user_id',Auth::id())->get();
-        foreach($carts as $item){
-            Order_items::create([
-                'order_id' => $orders->id,
-                'prod_id' => $item->prod_id,
-                'qty' => $item->prod_qty,
-                'price' => $item->Products->selling_price * $item->prod_qty,
             ]);
+                //cart 
+            $cart = Cart::where('user_id',Auth::id())->get();
 
-            $product = Product::where('id',$item->prod_id )->first();
-            $product->qty = $product->qty - $item->prod_qty;
-
-            $product->update();
-
-
+            //store order Items
+            foreach($cart as $item){
+            $order_items = Order_items::create([
+                'order_id' => $order->id,
+                'prod_id'  => $item->prod_id,
+                  'qty'    => $item->prod_qty,
+                 'price'   => $item->Products->selling_price * $item->prod_qty
+ 
+            ]);
         }
-        $cartitems = Cart::where('user_id',Auth::id())->get();
-        Cart::destroy($cartitems);
+            $product = Product::find($item->prod_id);
+            $product->qty = $product->qty - $item->prod_qty ;
+            
 
-        
-        return redirect()->route('f_placeorder');
+            $cartitems = Cart::where('user_id',Auth::id())->get();
+            Cart::destroy($cartitems);
+
+            $admins = User::where('roles', 'admin')->get();
+           Notification::send($admins, new OrderNotification($order));
+ 
+            DB::commit();
+
+            return redirect()->route('f_placeorder')->with('success',"Your order placed successfully");
+
+             
+        } catch (\Exception $th) {
+
+            DB::rollback();
+            return Redirect::to('/checkout')->with('error',"Please fill the form again");
+        }
 
 
     }
@@ -87,10 +104,19 @@ class OrderController extends Controller
 
 public function adminorderlist()
 {
+    
     $orders = Order::all();
+
     return  view('backend.orderlist',compact('orders'));
 }
 
+public function details($id)
+{
+    dd($id);
+    $order = Order::find($id);
+    return view('backend.orderdetails',compact('order'));
+
+}
 public function adminorderedit($id)
 {
      $orders = Order::find($id);
@@ -105,7 +131,7 @@ public function orderupdate(Request $request , String $id)
    $orders->email = $request->input('email');
    $orders->address = $request->input('address');
    $orders->phone  = $request->input('phone');
-   $orders->status = $request->input('status') == true ? '1':'0';;
+   $orders->status = $request->input('status');
 //    $orders->tracking_no = $request->input('tracking');
 
    $orders->update();

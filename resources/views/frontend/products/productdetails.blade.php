@@ -49,6 +49,7 @@
                      <p class="badge badge-danger stock1 d-none" >Out of stock</p>
 
                   </div>
+                 
                     <input type="hidden" value="{{$products->id}}" class="prod_id">
                     <label for="quantity">Quantity</label>
                     <div class="d-flex">
@@ -133,7 +134,7 @@
             timer:3000,
             dangerMode:true,
             });
-            window.loaction.reload();
+            window.location.reload();
           }
          });
       });

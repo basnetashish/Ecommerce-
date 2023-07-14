@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Backend\Product;
 use App\Models\Backend\Category;
-
+use App\Models\Backend\Order;
+use App\Models\User;
+use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -26,28 +29,8 @@ class HomeController extends Controller
      */
  
     public function roles(){
-        return view('admin');
+        $user = User::where('roles','admin')->get();
+        return view('admin',compact('user'));
     }
-
     
-
-   
-    // view category product
-   
-
-   
-
-   
-    public function searchproduct(Request $request)
-    {
-        dd($request);
-       $query = $request->input('input'); 
-       if($query){
-        $result = Product::where('name','LIKE','%'.$query.'%')->get();
-        return view('frontend.search');
-
-
-     }
-      
-    }
 }

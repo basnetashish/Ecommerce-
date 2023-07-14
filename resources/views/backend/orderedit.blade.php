@@ -36,13 +36,20 @@
          
        
             <!-- radio -->
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input"  name="status"   {{$orders->status == 1 ? 'checked':''}} id="exampleCheck2">
-                <label class="form-check-label" for="exampleCheck2"><b>Status</b></label>
-              </div>
-                <br>
-              
-                <br>
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-control" name="status">
+                <option value="pending" {{ $orders->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="accepted" {{ $orders->status === 'accepted' ? 'selected' : '' }}>Accepted</option>
+                <option value="shipped" {{ $orders->status === 'shipped' ? 'selected' : '' }}>Shipped</option>
+                <option value="completed" {{ $orders->status === 'completed' ? 'selected' : '' }}>Completed</option>
+                <option value="cancelled" {{ $orders->status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                <option value="returned" {{ $orders->status === 'returned' ? 'selected' : '' }}>Returned</option>
+
+                
+              </select>
+            </div>
+               
               <div class="form-group">
                 <label for="exampleInputPassword1">Tracking No</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" name="tracking_no" value={{$orders->tracking_no}} placeholder="Enter tracking number"></input>

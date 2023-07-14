@@ -25,10 +25,10 @@
     @foreach($order->orderItems as $item)
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6 col-xl-4 mx-auto" style="margin-left: auto; margin-right: 0;">
-        <div class="card" style="border-radius: 15px; height: 88vh; width: 30vw;  margin-bottom: 20px;">
+        <div class="card" style="border-radius: 15px; height: 89vh; width: 30vw;  margin-bottom: 20px;">
           <div class="bg-color">
           <img src="{{asset('assets/backend/product/'.$item->Products->image)}}"
-                style="height:300px;  margin-left:20%; margin-top:20px; " class=" "
+                style="height:300px; width:250px;  margin-left:20%; margin-top:20px; " class=" "
                 alt="product" />
          
               <a href="#!">
@@ -60,9 +60,6 @@
                       <p >
                         Price:  {{$item->Products->selling_price}}
                        </p>
-                      
-                     
-                 
                     </div>
                     <div>
                         <p style="margin-left:80px;">

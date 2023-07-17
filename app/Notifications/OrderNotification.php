@@ -48,10 +48,17 @@ class OrderNotification extends Notification
      */
     public function toArray(object $notifiable): array
     {
-        return [
-               'name' => $this->order['name'],
-               'tracking_no' =>  $this->order['tracking_no'] ,
-             
-        ];
+        $existingNotification = $notifiable->notifications()
+        ->where('data->tracking_no', $this->order->tracking_no)
+        ->first();
+
+    if ($existingNotification) {
+        return [];
+    }
+
+    return [
+        'name' => $this->order->name,
+        'tracking_no' => $this->order->tracking_no,
+    ];
     }
 }

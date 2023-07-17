@@ -27,7 +27,7 @@
                     <div class="rounded">
                         <div class="table-responsive table-borderless">
                             <table class="table">
-                                <thead style="font-size:18px">
+                                <thead style="font-size:15px">
                                     <tr>
                                         <th class="text-center">
                                             <div class="toggle-btn">
@@ -55,11 +55,29 @@
 
                                         <td>{{$order->tracking_no}}</td>
                                         <td >
-                                        @if($order->status == 0)
-                                            <span class="badge badge-danger">Pending</span>
-                                        @else
-                                            <span class="badge badge-success">Completed</span>
-                                        @endif
+                                          @switch($order->status)
+                                             @case('pending')
+                                             <span class="badge badge-danger">Pending</span>
+                                             @break
+                                             @case('accepted')
+                                             <span class="badge badge-info">Accepted</span>
+                                             @break
+                                             @case('shipped')
+                                             <span class="badge badge-info">Shipped</span>
+                                             @break
+                                             @case('completed')
+                                             <span class="badge badge-success">Completed</span>
+                                             @break
+                                             @case('returned')
+                                             <span class="badge badge-danger">Retured</span>
+                                             @break
+                                             @case('cancelled')
+                                             <span class="badge badge-danger">Cancelled</span>
+                                             @break
+
+                                             @default
+                                             <span class="badge badge-danger">Pending</span>
+                                          @endswitch
                                         </td>
                                         <td>
                                             <?php   $totprice =0; ?>
@@ -74,7 +92,7 @@
                                         </td>
                                         
                                         <td>
-                                            <a href="{{url('/orderdetails/'. $order->id)}}"><button class="btn btn-info">View</button></a>
+                                            <a href="{{url('/orderdetails/'. $order->id)}}"><button class="badge badge-info">View</button></a>
                                         </td>
                                       
                                         

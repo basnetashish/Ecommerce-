@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Notifications\OrderNotification;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Notification;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -68,9 +69,11 @@ class OrderController extends Controller
             $cartitems = Cart::where('user_id',Auth::id())->get();
             Cart::destroy($cartitems);
 
+            $latestorder= Order::latest()->first();
+            if($latestorder){
             $admins = User::where('roles', 'admin')->get();
-           Notification::send($admins, new OrderNotification($order));
- 
+           Notification::send($admins, new OrderNotification($latestorder));
+            }
             DB::commit();
 
             return redirect()->route('f_placeorder')->with('success',"Your order placed successfully");
@@ -110,13 +113,18 @@ public function adminorderlist()
     return  view('backend.orderlist',compact('orders'));
 }
 
-public function details($id)
-{
-    dd($id);
-    $order = Order::find($id);
-    return view('backend.orderdetails',compact('order'));
-
+public function adminorderdetails($id){
+   $orders = Order::where('id',$id)->get();
+   return view('backend.orderdetails',compact('orders'));
 }
+ public function print($id)
+ {
+    $orders = Order::where('id',$id)->get();
+    return view('backend.print',compact('orders'));
+ }
+
+ 
+
 public function adminorderedit($id)
 {
      $orders = Order::find($id);
@@ -139,4 +147,6 @@ public function orderupdate(Request $request , String $id)
    return  redirect()->route('order_list')->with('success',"Orders Status updated successfully");
 
 }
+
+
 }

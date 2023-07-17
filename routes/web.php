@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FrontController;
 use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\PDFController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\UserController;
 
@@ -59,8 +60,15 @@ Route::get('/backend/product/edit/{id}',[ProductController::class,'edit'])->name
 Route::put('/backend/product/update/{id}',[ProductController::class,'update'])->name('p_update');
 
 Route::get('/order-list',[OrderController::class,'adminorderlist'])->name('order_list');
+Route::get('/order-details/{id}',[OrderController::class,'adminorderdetails'])->name('order_details');
 Route::get('/order-edit/{id}',[OrderController::class,'adminorderedit'])->name('order_edit');
 Route::put('/order-update/{id}',[OrderController::class,'orderupdate']);
+Route::get('/order_details_print/{id}',[OrderController::class,'print'])->name('order_detail_print');
+Route::get('/generate/{id}',[PDFController::class,'generatePDF']);
+Route::get('/invoice/send-mail/{id}',[PDFController::class,'sendmail']);
+
+// order Invoice
+Route::get('/order-invoice',[PDFController::class,'invoice'])->name('order.invoice');
 
 
 });

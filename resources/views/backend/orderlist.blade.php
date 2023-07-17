@@ -15,7 +15,7 @@
             <th>Status</th>
             <th>Tracking No</th>
          
-            <th>Action</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -31,8 +31,9 @@
            
             @endforeach
             <td>
-                <a href="{{url('order-edit/'.$order->id)}}"><button type="submit" class="badge badge-info">Edit</button></a>
-                <a href="{{ url('details/'.$order->id)}}"><button type="submit" class="badge badge-primary">view</button></a>
+                <a href="{{ route('order_edit', $order->id) }}"><button type="submit" class="badge badge-info">Edit</button></a>
+                <a href="{{url('order-details/'.$order->id)}}"><button type="submit" class="badge badge-primary">Detail</button></a>
+              
             </td>
          </tr>
         </tbody>

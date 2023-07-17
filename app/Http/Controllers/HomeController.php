@@ -30,7 +30,13 @@ class HomeController extends Controller
  
     public function roles(){
         $user = User::where('roles','admin')->get();
-        return view('admin',compact('user'));
+        $users =User::where('roles','user')->get();
+        $order = Order::all();
+        $products = Product::all();
+        return view('admin',compact('user','users','order','products'));
+    }
+    public function order(){
+        return view('backend.orderdetails');
     }
     
 }

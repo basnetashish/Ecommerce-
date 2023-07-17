@@ -31,30 +31,38 @@
     <!-- SEARCH FORM -->
     
     <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
-        <li class="nav-item dropdown">
-         
-
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="far fa-bell"></i>
-            <span class="badge badge-warning navbar-badge notification">0
-              <ul class="dropdown-menu">
-
-                {{-- @foreach($user->notifications as $notification)
-
-                <li>{{$notification->data['tracking_no']}} order added</li>
-                @endforeach --}}
-              </ul>
-            </span>
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          @foreach($user as $admin)
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge">{{$admin->unreadNotifications->count()}}</span>
+        </a>
+       
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        
+          
+          <span class="dropdown-item dropdown-header">{{$admin->notifications->count()}} Notifications</span>
+          @foreach($admin->notifications as $notification)
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+          <span>{{ $notification->data['tracking_no'] }}  order added</span>
           </a>
-        </li>
+
+          <?php $notification->markAsRead(); ?>
+          @endforeach
+          @endforeach
+          
+        </div>
+       
+      </li>
+     
+        <li>
         <a class="dropdown-item" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
          {{ __('Logout') }}
      </a>
-
+      </li>
      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
          @csrf
      </form>
@@ -68,7 +76,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{{url('/admin')}}" class="brand-link">
       <img src="{{asset('assets/backend/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">AdminLTE 3</span>
@@ -82,7 +90,7 @@
           <img src="{{asset('assets/backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{url('/admin')}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -175,6 +183,7 @@
                 </a>
               </li>
               
+              
              
               
             </ul>
@@ -225,7 +234,7 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Dashboard </h1>
           </div><!-- /.col -->
-         
+
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -257,11 +266,11 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     
-  </footer>
+  </footer> --}}
 </div>
 <!-- ./wrapper -->
 

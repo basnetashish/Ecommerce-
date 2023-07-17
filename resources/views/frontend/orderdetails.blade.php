@@ -25,10 +25,10 @@
     @foreach($order->orderItems as $item)
     <div class="row justify-content-center">
       <div class="col-md-8 col-lg-6 col-xl-4 mx-auto" style="margin-left: auto; margin-right: 0;">
-        <div class="card" style="border-radius: 15px; height: 89vh; width: 30vw;  margin-bottom: 20px;">
+        <div class="card" style="border-radius: 15px; height: 100vh; width: 30vw;  margin-bottom: 20px;">
           <div class="bg-color">
           <img src="{{asset('assets/backend/product/'.$item->Products->image)}}"
-                style="height:300px; width:250px;  margin-left:20%; margin-top:20px; " class=" "
+                style="height:250px; width:250px;  margin-left:20%; margin-top:20px; " class=" "
                 alt="product" />
          
               <a href="#!">
@@ -63,11 +63,29 @@
                     </div>
                     <div>
                         <p style="margin-left:80px;">
-                          @if($order->status == 0)
-                          <span class="badge badge-danger">Pending</span>
-                      @else
-                          <span class="badge badge-success">Completed</span>
-                      @endif
+                            @switch($order->status)
+                              @case('pending')
+                              <span class="badge badge-danger">Pending</span>
+                              @break;
+                              @case('accepted')
+                              <span class="badge badge-info">Accepted</span>
+                              @break;
+                              @case('shipped')
+                              <span class="badge badge-primary">Shipped</span>
+                              @break;
+                              @case('completed')
+                              <span class="badge badge-success">Completed</span>
+                              @break;
+                              @case('cancelled')
+                              <span class="badge badge-danger">Cancelled</span>
+                              @break;
+                              @case('returned')
+                              <span class="badge badge-danger">Returned</span>
+                              @break;
+                              @default
+                              <span class="badge badge-danger">Pending</span>
+
+                            @endswitch
                         </p> 
                       <p style="margin-top: 120px;"> <b> Total Price: {{$item->price}}</b></p>
                     

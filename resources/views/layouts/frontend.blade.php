@@ -237,7 +237,7 @@ Headphones come with many technical specifications, usually located on the back 
             </div>
           </div>
         </div>
-        <div class="carousel_btn_box">
+        {{-- <div class="carousel_btn_box">
           <a class="carousel-control-prev" href="#customCarousel1" role="button" data-slide="prev">
             <i class="fa fa-angle-left" aria-hidden="true"></i>
             <span class="sr-only">Previous</span>
@@ -246,7 +246,7 @@ Headphones come with many technical specifications, usually located on the back 
             <i class="fa fa-angle-right" aria-hidden="true"></i>
             <span class="sr-only">Next</span>
           </a>
-        </div>
+        </div> --}}
       </div>
     </section>
     <!-- end slider section -->

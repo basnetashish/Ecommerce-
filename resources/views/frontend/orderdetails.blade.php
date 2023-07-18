@@ -18,6 +18,7 @@
     </nav>
     <!-- Breadcrumb -->
   </div>
+
 </div>
 <section style="background-color:#eee; min-height: 80vh;">
   <div class="container py-5">
@@ -58,6 +59,7 @@
                       <h6 >{{$item->Products->name}}</h6>
                       <p>Quantity: {{$item->qty}}</p>
                       <p >
+                       
                         Price:  {{$item->Products->selling_price}}
                        </p>
                     </div>

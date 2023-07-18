@@ -6,7 +6,9 @@
       @if(session()->has('success'))
     <div class="alert alert-success">
         {{ session()->get('success') }}
+        
     </div>
+    {{-- @include('flash-message') --}}
 @endif
       <div class="card">
         <div class="card-header">
@@ -14,8 +16,6 @@
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-              
-
               <div class="input-group-append">
                 <a href="{{route('p_create')}}"><button type="submit" class="btn btn-info">Add Products</button></a>
               </div>

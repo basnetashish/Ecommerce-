@@ -10,8 +10,6 @@
 
           <div class="card-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-              
-
               <div class="input-group-append">
                 <a href="{{route('c_create')}}"><button type="submit" class="btn btn-info">Add Category</button></a>
               </div>

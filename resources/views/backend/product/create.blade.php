@@ -27,74 +27,77 @@
         <div class="form-group">
           <label for="exampleInputEmail1">Products Name</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="name"  value="{{old('name')}}" placeholder="Enter products name ">
+          @error('name')
+          <div class=" text-small text-danger" >{{ $message }}</div>
+          @enderror
         </div>
         
-            <div class="form-group">
+            {{-- <div class="form-group">
               <label for="exampleInputEmail1">Products Slug</label>
               <input type="text" class="form-control" id="exampleInputEmail1" name="slug"  value="{{old('slug')}}" placeholder="Enter products slug ">
-            </div>
+            </div> --}}
        
         
         <div class="form-group">
           <label for="exampleInputPassword1">Small Description</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" name="small_descripiton" placeholder="Enter small description">
+          <input type="text" class="form-control" id="exampleInputPassword1" name="small_descripiton" value="{{old('small_descripiton')}}" placeholder="Enter small description">
         </div>
 
         <div class="form-group">
             <label for="exampleInputPassword1">Description</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" name="description" placeholder="Enter description">
+            <input type="text" class="form-control" id="exampleInputPassword1" name="description" value="{{old('description')}}" placeholder="Enter description">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1">Original Price</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" name="original_price" placeholder="Enter Original Price">
+            <input type="number" class="form-control" id="exampleInputPassword1" name="original_price" value="{{old('original_price')}}" placeholder="Enter Original Price">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1">Selling Price</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" name="selling_price" placeholder="Enter selling price">
+            <input type="number" class="form-control" id="exampleInputPassword1" name="selling_price" value="{{old('selling_price')}}" placeholder="Enter selling price">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1">Image</label>
-            <input type="file" class="form-control" id="exampleInputPassword1" name="image" placeholder="choose image ">
+            <input type="file" class="form-control" id="exampleInputPassword1" name="image"  placeholder="choose image ">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1">Quantity </label>
-            <input type="number" class="form-control" id="exampleInputPassword1" name="qty" placeholder="Enter  Quantity">
+            <input type="number" class="form-control" id="exampleInputPassword1" name="qty" value="{{old('qty')}}" placeholder="Enter  Quantity">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1">Tax </label>
-            <input type="number" class="form-control" id="exampleInputPassword1" name="tax" placeholder="Enter  Tax">
+            <input type="number" class="form-control" id="exampleInputPassword1" name="tax" value="{{old('tax')}}" placeholder="Enter  Tax">
           </div>
          
        
             <!-- radio -->
             <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="status" id="exampleCheck2">
+                <input type="checkbox" class="form-check-input" name="status" {{old('status')== '1' ? 'checked': ''}} id="exampleCheck2">
                 <label class="form-check-label" for="exampleCheck2"><b>Status</b></label>
               </div>
                 <br>
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" name="trending" id="exampleCheck2">
+                <input type="checkbox" class="form-check-input" name="trending" {{old('trending')== '1' ? 'checked': ''}} id="exampleCheck2">
                 <label class="form-check-label" for="exampleCheck2"><b>Trending</b></label>
               </div>
                 <br>
               <div class="form-group">
                 <label for="exampleInputPassword1">Meta Title</label>
-                <textarea type="text" class="form-control" id="exampleInputPassword1" name="meta_title" placeholder="Enter meta title"></textarea>
+                <textarea type="text" class="form-control" id="exampleInputPassword1" name="meta_title" placeholder="Enter meta title">{{old('meta_title')}}</textarea>
               </div>
 
               <div class="form-group">
                 <label for="exampleInputPassword1">Meta description</label>
-                <textarea type="text" class="form-control" id="exampleInputPassword1" name="meta_descrip" placeholder="Enter meta description"></textarea>
+                <textarea type="text" class="form-control" id="exampleInputPassword1" name="meta_descrip" placeholder="Enter meta description">{{old('meta_descrip')}}</textarea>
               </div>
 
               <div class="form-group">
                 <label for="exampleInputPassword1">Meta Keywords</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" name="meta_keywords" placeholder="Enter meta Keywords">
+                <input type="text" class="form-control" id="exampleInputPassword1" name="meta_keywords" value="{{old('meta_keywords')}}" placeholder="Enter meta Keywords">
               </div>
         
       </div>

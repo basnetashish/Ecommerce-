@@ -204,7 +204,7 @@
                   <button type="button" class="btn btn-success float-right"><i class="far fa-envelope"></i> Send Mail
                   </button>
                 </a>
-                <a href="{{url('/generate/'.$order->id)}}">
+                <a href="{{url('/order-invoice/'.$order->id)}}">
                 <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
                   <i class="fas fa-download"></i> Generate PDF
                 </button>

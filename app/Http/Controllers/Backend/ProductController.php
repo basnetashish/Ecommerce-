@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Backend\Product;
 use App\Models\Backend\Category;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -34,8 +35,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $request->validate([
+            'name'=> 'required|unique:products|min:3',
+
+        ]);
        $products = new Product();
-        
+      
        if($request->hasFile('image')){
         $file  = $request->file('image');
         $extension =$file->getClientOriginalExtension();

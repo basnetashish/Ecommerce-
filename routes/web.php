@@ -64,11 +64,11 @@ Route::get('/order-details/{id}',[OrderController::class,'adminorderdetails'])->
 Route::get('/order-edit/{id}',[OrderController::class,'adminorderedit'])->name('order_edit');
 Route::put('/order-update/{id}',[OrderController::class,'orderupdate']);
 Route::get('/order_details_print/{id}',[OrderController::class,'print'])->name('order_detail_print');
-Route::get('/generate/{id}',[PDFController::class,'generatePDF']);
+// Route::get('/generate/{id}',[PDFController::class,'generatePDF']);
 Route::get('/invoice/send-mail/{id}',[PDFController::class,'sendmail']);
 
 // order Invoice
-Route::get('/order-invoice',[PDFController::class,'invoice'])->name('order.invoice');
+Route::get('/order-invoice/{id}',[PDFController::class,'orderinvoice'])->name('order.invoice');
 
 
 });

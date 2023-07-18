@@ -13,16 +13,17 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class PDFController extends Controller
 {
-    public function generatePDF(String $id)
-    {  
-        // set_time_limit(300);
-        $order =  Order::with('orderItems')->findOrFail($id);
-        // dd($order);
-        $pdf = PDF::loadview('backend.generate',compact('order'));  
-        return $pdf->download('invoice.pdf');
+    // public function generatePDF(String $id)
+    // {  
+    //     // set_time_limit(300);
+    //     $order =  Order::with('orderItems')->findOrFail($id);
+    //     dd($order);
+    //     // $pdf = PDF::loadview('backend.order-invoice',compact('order'));  
+    //     // return $pdf->download('invoice.pdf');
+    //     return view('backend.order-invoice',compact($order));
      
 
-    }
+    // }
 
     public function sendmail($id){
 
@@ -39,8 +40,12 @@ class PDFController extends Controller
 
     }
 
-    public function invoice()
+    public function orderinvoice($id)
     {
-        return view('backend.order-invoice');
+        $order =  Order::with('orderItems')->findOrFail($id);
+        // dd($order);
+        $pdf = PDF::loadview('backend.order-invoice',compact('order'));  
+        return $pdf->download('invoice.pdf');
+        // return view('backend.order-invoice',compact('order'));
     }
 }

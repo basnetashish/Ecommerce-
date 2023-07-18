@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Backend\Wishlist;
 use App\Models\Backend\Product;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Backend\Cart;
 
 class WishlistController extends Controller
 {
@@ -22,7 +23,10 @@ class WishlistController extends Controller
         $product_qty = $request->input('prod_qty');
         if(Auth::check()){
             $product_check = Product::where('id',$product_id)->first();
-        if($product_check){
+            if(Cart::where('prod_id',$product_id)->where('user_id',Auth::id())->exists()){
+                return response()->json(['status'=> $product_check->name. " already added to the cart"]);
+            }
+         if($product_check){
             if(Wishlist::where('prod_id',$product_id)->where('user_id',Auth::id())->exists()){
 
                 return response()->json(['status'=> $product_check->name. " already added to the wishlist"]);

@@ -37,23 +37,20 @@
           <i class="far fa-bell"></i>
           <span class="badge badge-warning navbar-badge">{{$admin->unreadNotifications->count()}}</span>
         </a>
-       
+      
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-        
-          
           <span class="dropdown-item dropdown-header">{{$admin->notifications->count()}} Notifications</span>
           @foreach($admin->notifications as $notification)
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
           <span>{{ $notification->data['tracking_no'] }}  order added</span>
           </a>
-
           <?php $notification->markAsRead(); ?>
           @endforeach
           @endforeach
           
         </div>
-       
+        
       </li>
      
         <li>
@@ -182,10 +179,6 @@
                   <p>List</p>
                 </a>
               </li>
-              
-              
-             
-              
             </ul>
           </li>
           <li class="nav-item has-treeview">

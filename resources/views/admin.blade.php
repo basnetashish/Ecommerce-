@@ -70,7 +70,7 @@
               </div>
               <!-- /.row -->
               <!-- Main row -->
-              <div class="row">
+              {{-- <div class="row">
                 <!-- Left col -->
                 <section class="col-lg-7 connectedSortable">
                   <!-- Custom tabs (Charts with tabs)-->
@@ -109,7 +109,7 @@
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
                
                 <!-- right col -->
-              </div>
+              </div> --}}
               <!-- /.row (main row) -->
             </div><!-- /.container-fluid -->
           </section>

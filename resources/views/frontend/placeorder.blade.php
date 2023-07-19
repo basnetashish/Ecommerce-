@@ -1,6 +1,8 @@
 @extends('/frontend.mainpage')
 @section('content')
 
+@include('flash-message');
+
 <div class="container mt-5 d-flex justify-content-center" style="font-family: 'Lato', sans-serif;">
     <div class="card p-4 mt-3">
        <div class="first d-flex justify-content-between align-items-center mb-3">
@@ -45,6 +47,10 @@
                                 </thead>
                                 <tbody class="table-body">
                                     @foreach($orders as $order)
+
+                                    @if(!($order->status == 'cancelled'))
+
+                                    
                                     <tr class="cell-1">
                                         <td class="text-center">
                                             <div class="toggle-btn">
@@ -55,6 +61,7 @@
 
                                         <td>{{$order->tracking_no}}</td>
                                         <td >
+                                      
                                           @switch($order->status)
                                              @case('pending')
                                              <span class="badge badge-danger">Pending</span>
@@ -77,7 +84,9 @@
 
                                              @default
                                              <span class="badge badge-danger">Pending</span>
+                                            
                                           @endswitch
+                                        
                                         </td>
                                         <td>
                                             <?php   $totprice =0; ?>
@@ -97,6 +106,7 @@
                                       
                                         
                                     </tr>
+                                    @endif
                                     @endforeach
                                 </tbody>
                             </table>

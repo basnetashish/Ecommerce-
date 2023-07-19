@@ -147,6 +147,13 @@ public function orderupdate(Request $request , String $id)
    return  redirect()->route('order_list')->with('success',"Orders Status updated successfully");
 
 }
+public function orderDelete($id)
+{
 
-
+        $order = Order::findOrFail($id);
+        return redirect('/placeorder')->with('error',"Your order status is completed");
+        $order->status = 'Cancelled';
+        $order->save();
+       return redirect()->route('f_placeorder')->with('success',"Order Cancelled");
+}
 }

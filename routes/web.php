@@ -111,12 +111,11 @@ Route::middleware(['auth'])->group(function () {
 
   //wishlist
   Route::get('/wishlist',[WishlistController::class,'index']);
- Route::get('/count-wishlist',[WishlistController::class,'countwishlist']);
+  Route::get('/count-wishlist',[WishlistController::class,'countwishlist']);
   Route::post('/add-wishlist',[WishlistController::class,'addwishlist']);
   Route::delete('/delete-wishlist',[WishlistController::class,'deletewishlist']);
   Route::put('/update-wishlist',[WishlistController::class,'updatewishlist']);
-  
-
+  Route::get('/order-cancel/{id}',[OrderController::class,'orderDelete'])->name('order.cancel');
 });
 
 

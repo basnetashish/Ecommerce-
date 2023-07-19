@@ -107,8 +107,9 @@
               <a href="{{ url('/cart1') }}" class="cart-link" id="cartLink">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span>Cart</span>
+                @if(Auth::check())
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info cart-count">
-                  
+                 @endif 
                 </span> 
               </a>
            
@@ -149,8 +150,9 @@
                 </li>
                 <li class="nav-item {{ Request::is('wishlist') ? 'active' : '' }}">
                   <a class="nav-link" href="{{ url('/wishlist') }}">Wishlist
+                    @if(Auth::check())
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-info count-wishlist">
-                      
+                      @endif
                     </span> 
                   </a>
                   

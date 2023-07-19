@@ -21,7 +21,7 @@
 
 </div>
 <section style="background-color:#eee; min-height: 80vh;">
-  <div class="container py-5">
+  <div class="container py-5 product-data">
     @foreach($orders as $order)
     @foreach($order->orderItems as $item)
     <div class="row justify-content-center">
@@ -64,7 +64,7 @@
                        </p>
                     </div>
                     <div>
-                        <p style="margin-left:80px;">
+                        <p style="margin-left:80px;" class="cancel">
                             @switch($order->status)
                               @case('pending')
                               <span class="badge badge-danger">Pending</span>
@@ -91,10 +91,23 @@
                         </p> 
                       <p style="margin-top: 120px;"> <b> Total Price: {{$item->price}}</b></p>
                     
-                      <a href="{{url('/category')}}" > <b>Continue Shopping </b></a>
+                      
                     </div>
                   </div>
+                  <div class="d-flex justify-content-between">
+                   
+                    <div>
+                      @if(!($order->status =='completed'))
+                   <a href="{{route('order.cancel',['id'=>$order->id])}}" onclick="return confirm('Are you sure cancel the order?')" ><button type="submit" class="btn btn-danger orderCancel">Cancel Order</button></a>
+                   @endif
+                    </div>
+                  
+                    <div>
+                      <a href="{{url('/category')}}" > <b >Continue Shopping </b></a>
+                    </div>
+                   </div>
                  </div>
+                 
               </div>           
       </div>
     </div>
@@ -113,4 +126,21 @@ color:white;
 font-weight: bold;
 }
 </style>
+
+{{-- @section('script')
+<script>
+  $(document).ready(function(){
+    console.log('loaded')
+    var status = {{$order->status}}
+    console.log('Status:', status);
+    if(status == 'completed'){
+      $('.orderCancel').removeClass('d-none');
+    }else{
+      $('.orderCancel').addClass('d-none');
+    }
+
+  });
+</script>
+
+@endsection --}}
 @endsection

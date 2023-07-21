@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 @section('content')
  
-<div class="card card-primary">
+<div class="card ">
     <div class="card-header">
       <h3 class="card-title">Category Form</h3>
     </div>

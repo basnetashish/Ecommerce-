@@ -1,11 +1,6 @@
 @extends('frontend.mainpage')
 @section('content')
 
-@if(Session::has('error'))
-    <div class="alert alert-danger">
-        {{Session::get('error')}}
-    </div>
-@endif
 
 <div class="container py-4" style="font-family: 'Lato', sans-serif;">
     <div class="title text-center">
@@ -22,13 +17,12 @@
                 <div class="card-body">
                     <form role="form" action="{{url('/orderstore')}}" method="POST" enctype="multipart/form-data" >
                         @csrf
-                      
                         <div class="form-group">
                           <label for="exampleInputEmail1"> Full Name</label>
                           <input type="text" class="form-control" id="exampleInputEmail1" name="name"  value="{{old('name')}}" placeholder=" Full name ">
                           @error('name')
                             <div class=" text-small text-danger" >{{ $message }}</div>
-                            @enderror
+                           @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Email</label>

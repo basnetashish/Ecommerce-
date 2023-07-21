@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Backend\Category;
 use App\Models\Backend\Product;
+use App\Models\Backend\Ui;
 
 class UserController extends Controller
 {
@@ -18,11 +19,13 @@ class UserController extends Controller
         $products = Product::where('trending','1')->take(6)->get();
     }
         $categories =Category::where('popular','1')->take(6)->get();
-        return view('home1',compact('products','categories'));
+        $ui =  Ui::first();
+        return view('home1',compact('products','categories','ui'));
     }
 
     public function main(){
-        return view('frontend.mainpage');
+         $ui = Ui::first();
+        return view('frontend.mainpage',compact('ui'));
     }
 
     public function about()

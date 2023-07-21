@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades;
 use Illuminate\view\View;
 use App\Models\User;
+Use App\Models\Backend\Ui;
 use App\Models\Backend\Order;
 
 class ViewServiceProvider extends ServiceProvider
@@ -27,7 +28,11 @@ class ViewServiceProvider extends ServiceProvider
               
               $view->with('user', User::where('roles','admin')->get());
         });
-
+         
+        View()->composer('*',function(View $view)
+        {
+            $view->with('ui', Ui::first());
+        });
     
     }
 }

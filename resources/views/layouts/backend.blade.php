@@ -15,8 +15,10 @@
   <link rel="stylesheet" href="{{asset('assets/backend/dist/css/adminlte.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+  
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -33,21 +35,32 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          @foreach($user as $admin)
+          
           <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">{{$admin->unreadNotifications->count()}}</span>
+          @foreach($user as $users)
+          <span class="badge badge-warning navbar-badge">{{$users->unreadNotifications->count()}}</span>
+          @endforeach
         </a>
-      
+       
+        @foreach($user as $admin)
+        
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">{{$admin->notifications->count()}} Notifications</span>
           @foreach($admin->notifications as $notification)
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-          <span>{{ $notification->data['tracking_no'] }}  order added</span>
-          </a>
-          <?php $notification->markAsRead(); ?>
-          @endforeach
-          @endforeach
+          <div class="notification">
+              <a href="#" class="dropdown-item">
+                  @if($notification->type === 'App\Notifications\OrderCancelNotification')
+                      <span>{{ $notification->data['tracking_no'] }} order cancelled</span>   
+                  @elseif($notification->type === 'App\Notifications\OrderNotification')
+                      <span>{{ $notification->data['tracking_no'] }} order added</span>
+                  @endif
+              </a>
+              <?php $notification->markAsRead(); ?>
+          </div>
+      @endforeach
+            @endforeach
+          </div>
+         
           
         </div>
         
@@ -185,29 +198,24 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                  Ui
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+                <a href="{{ route('create.ui.information') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
+                  <p>Add Information</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="{{route('Information.Index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
+                  <p>Information List</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
-                </a>
-              </li>
+
             </ul>
           </li>
          
@@ -277,6 +285,8 @@
 <script src="{{asset('assets/backend/plugins/raphael/raphael.min.js')}}"></script>
 <script src="{{asset('assets/backend/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
 <script src="{{asset('assets/backend/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
+
+
 <!-- ChartJS -->
 <script src="{{asset('assets/backend/plugins/chart.js/Chart.min.js')}}"></script>
 

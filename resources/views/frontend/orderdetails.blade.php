@@ -1,7 +1,7 @@
 @extends('frontend.mainpage')
 
 @section('content')
-<div class="bg-warning">
+<div class="bg-warning ">
   <div class="container py-2" style="font-family: 'Lato', sans-serif;">
     <!-- Breadcrumb -->
     <nav class="d-flex">
@@ -20,13 +20,13 @@
   </div>
 
 </div>
-<section style="background-color:#eee; min-height: 80vh;">
+<section style="background-color:#eee; min-height: 80vh;" >
   <div class="container py-5 product-data">
     @foreach($orders as $order)
     @foreach($order->orderItems as $item)
     <div class="row justify-content-center">
-      <div class="col-md-8 col-lg-6 col-xl-4 mx-auto" style="margin-left: auto; margin-right: 0;">
-        <div class="card" style="border-radius: 15px; height: 100vh; width: 30vw;  margin-bottom: 20px;">
+      <div class="col-md-8 col-lg-6 col-sm-4  mx-auto" style="margin-left: auto; margin-right: 0;">
+        <div class="card " style="border-radius: 15px; height: 100vh; width: 30vw;  margin-bottom: 20px;">
           <div class="bg-color">
           <img src="{{asset('assets/backend/product/'.$item->Products->image)}}"
                 style="height:250px; width:250px;  margin-left:20%; margin-top:20px; " class=" "

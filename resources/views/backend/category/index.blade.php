@@ -28,9 +28,9 @@
                 <th>Status</th>
                 <th>Popular</th>
                 <th>Image</th>
-                <th>Meta Title</th>
+                {{-- <th>Meta Title</th>
                 <th>Meta Description</th>
-                <th>Meta Keywords</th>
+                <th>Meta Keywords</th> --}}
                 <th>Action</th>
               </tr>
             </thead>
@@ -46,12 +46,13 @@
                 <img src="{{asset('/assets/category/'.$cat->image)}}" width="50" height="50" alt="image">
             
             </td>
-              <td>{{$cat->meta_title}}</td>
+              {{-- <td>{{$cat->meta_title}}</td>
               <td>{{$cat->meta_descrip}}</td>
-              <td>{{$cat->meta_keywords}}</td>
+              <td>{{$cat->meta_keywords}}</td> --}}
               <td>
-              <a href="{{url('backend/category/delete/'.$cat->id)}}"> <button type="submit" class="btn btn-danger">Delete</button></a>
+                <a href="{{url('backend/category/show/'.$cat->id)}}"> <button type="submit" class="btn btn-info">Show</button></a>
               <a href="{{url('backend/category/edit/'.$cat->id)}}"> <button type="submit" class="btn btn-warning">Edit</button></a>
+              <a href="{{url('backend/category/delete/'.$cat->id)}}"> <button type="submit" class="btn btn-danger">Delete</button></a>
               </td>
 
              

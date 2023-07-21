@@ -32,13 +32,13 @@
                 <th>Slug</th>
                 {{-- <th>Small Description</th>
                 <th>Description</th> --}}
-                <th>Orginal Price</th>
+                {{-- <th>Orginal Price</th> --}}
                 <th>Selling Price</th>
                 <th>Image</th>
                 <th>Quantity</th>
                 <th>Tax</th>
                 <th>Status</th>
-                <th>Trending</th>
+                {{-- <th>Trending</th> --}}
                 {{-- <th>Meta Title</th>
                 <th>Meta Description</th>
                 <th>Meta Keywords</th> --}}
@@ -52,7 +52,7 @@
                <td>{{$product->slug}}</td>
               {{-- <td>{{$product->small_description}}</td> --}}
               {{-- <td>{{$product->description}}</td>  --}}
-              <td>{{$product->orginal_price}}</td>
+              {{-- <td>{{$product->orginal_price}}</td> --}}
               <td>{{$product->selling_price}}</td>
               <td>
                 <img src="{{asset('/assets/backend/product/'.$product->image)}}" width="50" height="50" alt="image">
@@ -61,7 +61,7 @@
               <td>{{$product->qty}}</td>
               <td>{{$product->tax}}</td>
               <td>{{$product->status}}</td>
-              <td>{{$product->trending}}</td>
+              {{-- <td>{{$product->trending}}</td> --}}
               {{-- <td>{{$product->meta_title}}</td>
               <td>{{$product->meta_descrip}}</td>
               <td>{{$product->meta_keywords}}</td> --}}

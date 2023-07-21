@@ -3,20 +3,13 @@
 
 @include('flash-message');
 
-<div class="container mt-5 d-flex justify-content-center" style="font-family: 'Lato', sans-serif;">
+<div class="container mt-2 d-flex justify-content-center" style="font-family: 'Lato', sans-serif;">
     <div class="card p-4 mt-3">
        <div class="first d-flex justify-content-between align-items-center mb-3">
          <div class="info">
             <h5><strong style="color:mediumblue">Thank you , {{Auth::user()->name}}</strong></h5>
-           
-            <span class="order"> Order Id :   </span>
-          
-              
          </div>
-        
          <i class="fas fa-truck fa-4x" style="color: orange"></i>
-           
-
        </div>
            <div class="detail">
        <span class="d-block summery">Your order has been dispatched. we are delivering you order.</span>

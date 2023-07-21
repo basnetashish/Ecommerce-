@@ -7,17 +7,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OrderNotification extends Notification
+class OrderCancelNotification extends Notification
 {
     use Queueable;
-    private $latestorder;
-
+    private $order;
+    
     /**
      * Create a new notification instance.
      */
-    public function __construct($latestorder)
+    public function __construct($order)
     {
-        $this->latestorder = $latestorder;
+        $this->order = $order;
     }
 
     /**
@@ -49,15 +49,16 @@ class OrderNotification extends Notification
     public function toArray(object $notifiable): array
     {
         $existingNotification = $notifiable->notifications()
-        ->where('data->tracking_no', $this->latestorder->tracking_no)
-        ->first();
+        ->where('type', OrderCancelNotification::class)
+        ->where('data->tracking_no',$this->order->tracking_no)
+        ->count();
 
     if ($existingNotification) {
-        return [];
+       return [];
     }
-
     return [
-        'tracking_no'=> $this->latestorder->tracking_no,
-    ];
-   }
+         'tracking_no' => $this->order->tracking_no,
+        ];
+    }
+    
 }

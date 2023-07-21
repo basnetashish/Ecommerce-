@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Notifications\OrderNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use App\Models\Backend\Ui;
 
 class HomeController extends Controller
 {
@@ -38,5 +39,7 @@ class HomeController extends Controller
     public function order(){
         return view('backend.orderdetails');
     }
+
+
     
 }

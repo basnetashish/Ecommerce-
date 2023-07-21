@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Notifications\OrderCancelNotification;
 use App\Notifications\OrderNotification;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Notification;
@@ -40,6 +41,13 @@ class OrderController extends Controller
   
         try {
             DB::beginTransaction();
+            $validator = $request->validate([
+                'name'=> 'required',
+                'email' => 'required',
+                'address'=>'required',
+                'phone'=> 'required|regex:/^98\d{8}$/ ',
+    
+            ]);
             $order= Order::create([
                     'user_id' =>Auth::id(),
                     'name' => $request->input('name'),
@@ -151,9 +159,14 @@ public function orderDelete($id)
 {
 
         $order = Order::findOrFail($id);
-        return redirect('/placeorder')->with('error',"Your order status is completed");
         $order->status = 'Cancelled';
         $order->save();
+        
+       if($order){
+         $users = User::where('roles','admin')->get();
+         Notification::send($users, new OrderCancelNotification($order));
+       }
        return redirect()->route('f_placeorder')->with('success',"Order Cancelled");
+
 }
 }

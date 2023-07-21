@@ -2,53 +2,60 @@
 
 @section('content')
 
-<div class="container">
-    <br>
-    <div class="heading_container heading_center">
-        <h2>{{$categories->name}}</h2>
-    </div>
-    
-    @if($products->isEmpty())
-        <br>     
-    <div   style="height: 200px" class="alert alert-danger text-center" role="alert">
-        <br>
-        <h4 class="alert-heading">Sorry!</h4>
-       <h4>Product out of stock. Please visit next one !</h4>       
-       <br>
+<section class="product_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+            {{$categories->name}}
+        </h2>
       </div>
-<br>
-    @else
-    <div class="py-5 min-height: 100vh;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                    @foreach($products as $product)
-                        <div class="col-md-4">
-                            <a href="{{url('products/'.$product->slug)}}">
-                            <div class="card">
-                                <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px" alt="products image">
-                                
-                                 <div class="card-body">
-                                  <h5>
-                                    {{$product->name}}
-                                </h5>
-                                 <span class="float-start">{{$product->selling_price}}</span>
-                                 <span class="float-end float-right"><s style="color: red">{{$product->orginal_price}}</s></span>
-                                 
-                                
-
-                                 </div>
-                            </div>
-                        </a>
-                        </div>
-                        @endforeach
-                    </div>
-    
-                </div>
-            </div>
-        </div>
+      @if($products->isEmpty())
+      <br>     
+  <div   style="height: 200px" class="alert alert-danger text-center" role="alert">
+      <br>
+      <h4 class="alert-heading">Sorry!</h4>
+     <h4>Product out of stock. Please visit next one !</h4>       
+     <br>
     </div>
-</div>
-    @endif   
+<br>
+  @else
+      <div class="row">
+        @foreach($products as $product)
+        <div class="col-sm-6 col-lg-4">
+          <div class="box">
+            <div class="img-box">
+              <img src="{{asset('assets/backend/product/'.$product->image)}}" alt="">
+              <a href="{{url('products/'.$product->slug)}}" class="add_cart_btn">
+                <span>
+                  Add To Cart
+                </span>
+              </a>
+            </div>
+            <div class="detail-box">
+              <h5>
+                {{$product->name}}
+              </h5>
+              <div class="product_info">
+                <h5>
+                  <span>Rs.</span> {{$product->selling_price}}
+                </h5>
+                <div>
+                    <span class="float-end float-right"><s style="color: red">{{$product->orginal_price}}</s></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endforeach
+       
+        
+      
+      
+     
+      </div>
+    
+    </div>
+    @endif
+  
+</section>
 @endsection

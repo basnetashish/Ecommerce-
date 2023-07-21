@@ -57,13 +57,13 @@
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call : 9812874502
+                  Call : {{$ui->phone}}
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  Email : electro@gmail.com
+                  Email : {{$ui->email}}
                 </span>
               </a>
             </div>
@@ -123,7 +123,7 @@
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="/">
               <span>
-                Electro
+                {{$ui->company_name}}
               </span>
             </a>
 
@@ -209,21 +209,21 @@
             <h5>
               <a href="" class="navbar-brand">
                 <span>
-                  Electro
+                  {{$ui->company_name}}
                 </span>
               </a>
             </h5>
             <p>
               <i class="fa fa-map-marker" aria-hidden="true"></i>
-              Sukedhara
+              {{$ui->address}}
             </p>
             <p>
               <i class="fa fa-phone" aria-hidden="true"></i>
-              9845273598
+             {{$ui->phone}}
             </p>
             <p>
               <i class="fa fa-envelope" aria-hidden="true"></i>
-              electro@gmail.com
+             {{$ui->email}}
             </p>
           </div>
         </div>
@@ -233,7 +233,7 @@
               Information
             </h5>
             <p>
-              Ecommerce website is your digital storefront on the internet. It facilitates the transaction between a buyer and seller. It is the virtual space where you showcase products, and online customers make selections
+              {{$ui->information}}
             </p>
           </div>
         </div>

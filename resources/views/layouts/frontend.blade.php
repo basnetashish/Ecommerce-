@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -12,28 +11,19 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
   <title>Electro</title>
-
-
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap.css')}}" />
-
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet"> <!-- range slider -->
-
   <!-- font awesome style -->
   <link href="{{asset('assets/frontend/css/font-awesome.min.css')}}" rel="stylesheet" />
-
   <!-- Custom styles for this template -->
   <link href="{{asset('assets/frontend/css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{asset('assets/frontend/css/responsive.css')}}" rel="stylesheet" />
-
 </head>
-
 <body>
-
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -44,13 +34,13 @@
               <a href="">
                 <i class="fa fa-phone" aria-hidden="true"></i>
                 <span>
-                  Call : 9812874502
+                  Call :{{$ui->phone}}
                 </span>
               </a>
               <a href="">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
                 <span>
-                  Email : electro@gmail.com
+                  Email : {{$ui->email}}
                 </span>
               </a>
             </div>
@@ -61,8 +51,7 @@
               <button class="" type="submit">
                 <i class="fa fa-search" aria-hidden="true"></i>
               </button>
-            </a>
-         
+            </a>       
           </form>
             <div class="user_option_box">
              @if(Auth::check())
@@ -91,10 +80,7 @@
                  Login
                 </span>
               </a>
-
-            
             @endif
-            
             <a href="{{url('/cart1')}}" class="cart-link {{ Request::is('cart1') ? 'active' : '' }}">
               <i class="fa fa-shopping-cart" aria-hidden="true"></i>
               <span>
@@ -105,25 +91,21 @@
                  @endif 
               </span> 
             </a>
-              
             </div>
           </div>
-
         </div>
       </div>
       <div class="header_bottom">
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="/userhome">
-              <span>
-                Electro
+              <span class="d-flex justify-content">
+                {{$ui->company_name}}
               </span>
             </a>
-
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ">
                 <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
@@ -148,9 +130,7 @@
                     @endif
                   </span> 
                 </a>
-                </li>
-
-               
+              </li>
               </ul>
             </div>
           </nav>
@@ -171,9 +151,7 @@
                       Welcome to our shop
                     </h1>
                     <p>
-                   
-
-Headphones come with many technical specifications, usually located on the back of the box of the headphones.
+                        Headphones come with many technical specifications, usually located on the back of the box of the headphones.
                     </p>
                     <a href="">
                       Read More
@@ -251,94 +229,82 @@ Headphones come with many technical specifications, usually located on the back 
     </section>
     <!-- end slider section -->
   </div>
-
-
   <!-- product section -->
-
   <section class="product_section layout_padding">
     <div class="container">
-        <br>
-        <div class="heading_container heading_center">
-            <h2> Trending Products</h2>
-        </div>
-    
-        <div class="py-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                        @foreach($products as $product)
-                            <div class="col-md-4 mb-3">
-                              <a href="{{url('products/'.$product->slug)}}">
-                                <div class="card">
-                                    <img src="{{asset('assets/backend/product/'.$product->image)}}" height="300px"  alt="products image">
-                                    <div class="card-body">
-                                      <h5>
-                                        {{$product->name}}
-                                    </h5>
-                                     <span class="float-start">{{$product->selling_price}}</span>
-                                     <span class="float-end float-right"><s style="color: red">{{$product->orginal_price}}</s></span>
-                                     
-                                    
-    
-                                     </div>
-                                </div>
-                              </a>
-                            </div>
-                            @endforeach
-                        </div>
-        
-                    </div>
-                </div>
+      <div class="heading_container heading_center">
+        <h2>
+          Trending Products
+        </h2>
+      </div>
+      <div class="row">
+        @foreach($products as $product)
+        <div class="col-sm-6 col-lg-4">
+          <div class="box">
+            <div class="img-box">
+              <img src="{{asset('assets/backend/product/'.$product->image)}}" alt="">
+              <a href="{{url('products/'.$product->slug)}}" class="add_cart_btn">
+                <span>
+                  Add To Cart
+                </span>
+              </a>
             </div>
+            <div class="detail-box">
+              <h5>
+                {{$product->name}}
+              </h5>
+              <div class="product_info">
+                <h5>
+                  <span>Rs.</span> {{$product->selling_price}}
+                </h5>
+                <div>
+                    <span class="float-end float-right"><s style="color: red">{{$product->orginal_price}}</s></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        @endforeach
+      </div>
     </div>
-  </section>
-
+</section>
 {{-- Category section --}}
-<div class="container">
+<section class="product_section layout_padding">
+  <div class="container">
     <div class="heading_container heading_center">
-        <br>
-        <h2> Popular Categories</h2>
+      <h2>
+        Popular Categories
+      </h2>
     </div>
-
-    <div class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                    @foreach($categories as $category)
-                        <div class="col-md-4 mb-3">
-                          <a href="{{url('/category/'.$category->slug)}}">
-                            <div class="card" >
-                                <img src="{{asset('/assets/category/'.$category->image)}}" height="300px"  alt="Category image">
-                                
-                                 <div class="card-body">
-                                  <h5>
-                                    {{$category->name}}
-                                </h5>
-                                  <small>
-                                   {{$category->description}}
-                                </small>
-    
-    
-                                 </div>
-                            </div>
-                          </a>
-                        </div>
-                        @endforeach
-                    </div>
-    
-                </div>
+    <div class="row">
+      @foreach($categories as $category)
+      <div class="col-sm-6 col-lg-4">
+        <div class="box">
+          <div class="img-box">
+            <img src="{{asset('/assets/category/'.$category->image)}}" alt="">
+            <a href="{{url('/category/'.$category->slug)}}" class="add_cart_btn">
+              <span>
+               View Products
+              </span>
+            </a>
+          </div>
+          <div class="detail-box">
+            <h5>
+              {{$category->name}}
+            </h5>
+            <div class="product_info">
+             <small>
+              {{$category->description}}  
+            </small> 
             </div>
+          </div>
         </div>
+      </div>
+      @endforeach
     </div>
-</div>
- 
+  </div>
+</section>
 {{-- category section ends --}}
-
-  <!-- end product section -->
-
   <!-- about section -->
   <div class="heading_container heading_center">
     <br>
@@ -370,10 +336,6 @@ Headphones come with many technical specifications, usually located on the back 
       </div>
     </div>
   </section>
-
-  
-
-
   <!-- client section -->
 <br>
   <section class="client_section layout_padding-bottom">
@@ -405,7 +367,7 @@ Headphones come with many technical specifications, usually located on the back 
                 </div>
                 <div class="client-id">
                   <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/client.jpg')}}" alt="">
+                    <img src="{{asset('assets/frontend/images/client.jpg')}}" height="100px;" alt="">
                   </div>
                   <div class="name">
                     <h5>
@@ -437,7 +399,7 @@ Headphones come with many technical specifications, usually located on the back 
                 </div>
                 <div class="client-id">
                   <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/client.jpg')}}" alt="">
+                    <img src="{{asset('assets/frontend/images/client.jpg')}}" height="100px;" alt="">
                   </div>
                   <div class="name">
                     <h5>
@@ -469,7 +431,7 @@ Headphones come with many technical specifications, usually located on the back 
                 </div>
                 <div class="client-id">
                   <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/client.jpg')}}"alt="">
+                    <img src="{{asset('assets/frontend/images/client.jpg')}}" height="100px;" alt="">
                   </div>
                   <div class="name">
                     <h5>
@@ -512,21 +474,21 @@ Headphones come with many technical specifications, usually located on the back 
             <h5>
               <a href="" class="navbar-brand">
                 <span>
-                  Electro
+                  {{$ui->company_name}}
                 </span>
               </a>
             </h5>
             <p>
               <i class="fa fa-map-marker" aria-hidden="true"></i>
-              Sukedhara
+              {{$ui->address}}
             </p>
             <p>
               <i class="fa fa-phone" aria-hidden="true"></i>
-              9845273598
+             {{$ui->phone}}
             </p>
             <p>
               <i class="fa fa-envelope" aria-hidden="true"></i>
-              electro@gmail.com
+              {{$ui->email}}
             </p>
           </div>
         </div>
@@ -536,7 +498,7 @@ Headphones come with many technical specifications, usually located on the back 
               Information
             </h5>
             <p>
-              Ecommerce website is your digital storefront on the internet. It facilitates the transaction between a buyer and seller. It is the virtual space where you showcase products, and online customers make selections
+            {{$ui->information}}
             </p>
           </div>
         </div>
@@ -580,7 +542,7 @@ Headphones come with many technical specifications, usually located on the back 
            
             <div class="social_box">
               <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-facebook" aria-hidden="true"  ></i>
               </a>
               <a href="">
                 <i class="fa fa-twitter" aria-hidden="true"></i>
@@ -597,9 +559,7 @@ Headphones come with many technical specifications, usually located on the back 
       </div>
     </div>
   </section>
-
   <!-- end info_section -->
-
 
   <!-- footer section -->
   <footer class="footer_section">
@@ -617,10 +577,7 @@ Headphones come with many technical specifications, usually located on the back 
   <script src="{{asset('assets/frontend/js/bootstrap.js')}}"></script>
   <!-- custom js -->
   <script src="{{asset('assets/frontend/js/custom.js')}}"></script>
-
-
 </body>
-
 </html>
 
 

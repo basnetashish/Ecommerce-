@@ -2,43 +2,45 @@
 
 @section('content')
 
-<div class="container">
-    <div class="heading_container heading_center">
-        <br>
-        <h2> Categories</h2>
-    </div>
-
-    <div class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                    @foreach($categories as $category)
-                        <div class="col-md-4 mb-3">
-                            <a href="{{url('/category/'.$category->slug)}}">
-                             <div class="card" >
-                                <img src="{{asset('/assets/category/'.$category->image)}}" height="300px"  alt="Category image">
-                                
-                                 <div class="card-body">
-                                  <h5>
-                                    {{$category->name}}
-                                </h5>
-                                  <small>
-                                   {{$category->description}}
-                                </small>
-    
-    
-                                 </div>
-                             </div>
-                          </a>
-                        </div>
-                        @endforeach
-                    </div>
-    
-                </div>
+<section class="product_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Our Category
+        </h2>
+      </div>
+      <div class="row">
+        @foreach($categories as $category)
+        <div class="col-sm-6 col-lg-4">
+          <div class="box">
+            <div class="img-box">
+              <img src="{{asset('/assets/category/'.$category->image)}}" alt="">
+              <a href="{{url('/category/'.$category->slug)}}" class="add_cart_btn">
+                <span>
+                  View Products
+                </span>
+              </a>
             </div>
+            <div class="detail-box">
+              <h5>
+                {{$category->name}}
+              </h5>
+              <div class="product_info">
+                <small>
+                    {{$category->description}}
+
+                </small>
+
+              </div>
+            </div>
+          </div>
         </div>
+        @endforeach
+
+      </div>
+    
     </div>
-</div>
+  
+</section>
 
 @endsection

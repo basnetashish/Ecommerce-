@@ -40,14 +40,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato&family=Roboto:wght@100;400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
 
-
-
+  {{-- // font awesome --}}
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
   
 </head>
 
 <body>
 
-  <div class="hero_area">
+  <div class="hero_area"  style="font-family: 'Roboto', sans-serif;">
     <!-- header section strats -->
     <header class="header_section">
       <div class="header_top">
@@ -201,7 +201,7 @@
   <!-- end client section -->
 
   <!-- info section -->
-  <section class="info_section ">
+  <section class="info_section " style="font-family: 'Roboto', sans-serif;">
     <div class="container">
       <div class="row">
         <div class="col-md-3">
@@ -271,25 +271,24 @@
                  Testimonial
                 </a>
               </li>
-              
             </ul>
           </div>
+        
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3  ">
           <div class="info_form " >
-           
             <div class="social_box">
               <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
+                <i class="fa fa-facebook"></i>
               </a>
               <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
+                <i class="fa fa-twitter" ></i>
               </a>
               <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
+                <i class="fa fa-instagram"></i>
               </a>
               <a href="">
-                <i class="fa fa-youtube" aria-hidden="true"></i>
+                <i class="fa fa-youtube" ></i>
               </a>
             </div>
           </div>

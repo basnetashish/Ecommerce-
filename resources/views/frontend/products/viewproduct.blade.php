@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="product_section layout_padding">
+<section class="product_section layout_padding" style="font-family: 'Roboto', sans-serif;">
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
@@ -19,7 +19,7 @@
     </div>
 <br>
   @else
-      <div class="row">
+      <div class="row" style="font-family: 'Roboto', sans-serif;">
         @foreach($products as $product)
         <div class="col-sm-6 col-lg-4">
           <div class="box">
@@ -47,15 +47,8 @@
           </div>
         </div>
         @endforeach
-       
-        
-      
-      
-     
       </div>
-    
     </div>
     @endif
-  
 </section>
 @endsection

@@ -23,6 +23,7 @@ class OrderController extends Controller
     public function checkout()
     {
         $cartitems = Cart::where('user_id',Auth::id())->get();
+       
         foreach($cartitems as $item)
         {
             if(!Product:: where('id', $item->prod_id)->where('qty','>=',$item->prod_qty)->exists())
@@ -31,7 +32,7 @@ class OrderController extends Controller
                     $removeitem->delete();
             }
         }
-            
+       
         $carts = Cart::where('user_id',Auth::id())->get();
         return view('frontend.checkout',compact('carts'));
     }
@@ -143,10 +144,10 @@ public function orderupdate(Request $request , String $id)
 {
    $orders = Order::find($id);
 
-   $orders->name = $request->input('name');
-   $orders->email = $request->input('email');
-   $orders->address = $request->input('address');
-   $orders->phone  = $request->input('phone');
+//    $orders->name = $request->input('name');
+//    $orders->email = $request->input('email');
+//    $orders->address = $request->input('address');
+//    $orders->phone  = $request->input('phone');
    $orders->status = $request->input('status');
 //    $orders->tracking_no = $request->input('tracking');
 

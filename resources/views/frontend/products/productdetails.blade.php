@@ -1,25 +1,19 @@
 @extends('frontend.mainpage')
-
-
 @section('content')
-
-
-
 <div class="bg-warning ">
-  <div class="container py-2" style="font-family: 'Lato', sans-serif;">
+  <div class="container py-2" style="font-family: 'Roboto', sans-serif;">
     <!-- Breadcrumb -->
     <nav class="d-flex">
       <h6 class="  mb-0">
         <a href="{{url('/home')}}" class="text-hover">Home</a>
         <span class="text-white-50 mx-2"> > </span>
         <a href="{{url('/category')}}" class="text-hover">Category</a>
-     
       </h6>
     </nav>
     <!-- Breadcrumb -->
   </div>
 </div>
-    <div class="container py-5" style="font-family: 'Lato', sans-serif;">
+    <div class="container py-5" style="font-family: 'Roboto', sans-serif;">
 
       <div class="row justify-content-center mb-3">
         <div class="col-md-12 col-xl-10">
@@ -72,13 +66,9 @@
                   @endif
                   <br>
                   <div class="d-flex flex-column mt-3">
-
                     @if($products->qty>0)
                     <button class="btn btn-primary btn-sm addtocart" data-productid="{{$products->id}}" type="button"> <i class="fa fa-shopping-cart"></i>Add to cart</button>
-                    
                     @endif
-
-                   
                     <button class="btn btn-outline-success btn-sm mt-2 addwishlist" data-productid="{{$products->id}}"  type="button"> <i class="fa fa-heart"></i>
                       Add to wishlist
                     </button>

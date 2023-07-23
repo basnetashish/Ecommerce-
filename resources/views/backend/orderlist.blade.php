@@ -31,8 +31,8 @@
            
             @endforeach
             <td>
-                <a href="{{ route('order_edit', $order->id) }}"><button type="submit" class="badge badge-info">Edit</button></a>
-                <a href="{{url('order-details/'.$order->id)}}"><button type="submit" class="badge badge-primary">Detail</button></a>
+                <a href="{{ route('order_edit', $order->id) }}"><button type="submit" class="btn btn-info">Edit</button></a>
+                <a href="{{url('order-details/'.$order->id)}}"><button type="submit" class="btn btn-primary">Detail</button></a>
               
             </td>
          </tr>

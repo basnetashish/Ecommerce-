@@ -2,7 +2,7 @@
 
 @section('content')
 
-<section class="client_section layout_padding-bottom">
+<section class="client_section layout_padding-bottom" style="font-family: 'Roboto', sans-serif;">
     <div class="container">
         <br>
       <div class="heading_container heading_center">

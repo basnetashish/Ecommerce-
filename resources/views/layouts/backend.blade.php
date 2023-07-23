@@ -47,12 +47,16 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">{{$admin->notifications->count()}} Notifications</span>
           @foreach($admin->notifications as $notification)
+          <div class="dropdown-divider"></div>
           <div class="notification">
               <a href="#" class="dropdown-item">
                   @if($notification->type === 'App\Notifications\OrderCancelNotification')
-                      <span>{{ $notification->data['tracking_no'] }} order cancelled</span>   
+                   
+                      <span>{{ $notification->data['tracking_no'] }} order cancelled</span> <br> 
+                      <span><small>{{$notification->created_at}}</small></span> 
                   @elseif($notification->type === 'App\Notifications\OrderNotification')
-                      <span>{{ $notification->data['tracking_no'] }} order added</span>
+                      <span>{{ $notification->data['tracking_no'] }} order added</span><br>
+                      <span><small>{{$notification->created_at}}</small></span>
                   @endif
               </a>
               <?php $notification->markAsRead(); ?>

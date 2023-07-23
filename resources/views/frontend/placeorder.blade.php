@@ -3,7 +3,7 @@
 
 @include('flash-message');
 
-<div class="container mt-2 d-flex justify-content-center" style="font-family: 'Lato', sans-serif;">
+<div class="container mt-2 d-flex justify-content-center" style="font-family: 'Roboto', sans-serif;">
     <div class="card p-4 mt-3">
        <div class="first d-flex justify-content-between align-items-center mb-3">
          <div class="info">

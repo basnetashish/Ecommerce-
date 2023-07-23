@@ -4,7 +4,7 @@
 
 
   <?php  $total = 0    ?>
-<div class="bg-warning">
+<div class="bg-warning" style="font-family: 'Roboto', sans-serif;">
     <div class="container py-2" style="font-family: 'Lato', sans-serif;">
       <!-- Breadcrumb -->
       <nav class="d-flex">
@@ -115,7 +115,7 @@
     </div>
 </section>
    @else 
-   <div class="container-fluid  mt-150 py-4">
+   <div class="container-fluid  mt-150 py-4" style="font-family: 'Roboto', sans-serif;">
     <div class="row">
     
      <div class="col-md-12">

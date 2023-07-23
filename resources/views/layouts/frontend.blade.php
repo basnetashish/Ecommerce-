@@ -22,8 +22,13 @@
   <link href="{{asset('assets/frontend/css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{asset('assets/frontend/css/responsive.css')}}" rel="stylesheet" />
+  {{-- //google --}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caudex&family=Lato&family=Roboto:wght@100;300;400;500;700&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div style="font-family: 'Roboto', sans-serif;">
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
@@ -539,7 +544,6 @@
         </div>
         <div class="col-md-3">
           <div class="info_form ">
-           
             <div class="social_box">
               <a href="">
                 <i class="fa fa-facebook" aria-hidden="true"  ></i>
@@ -570,7 +574,7 @@
     </div>
   </footer>
   <!-- footer section -->
-
+  </div>
   <!-- jQery -->
   <script src="{{asset('assets/frontend/js/jquery-3.4.1.min.js')}}"></script>
   <!-- bootstrap js -->

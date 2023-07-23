@@ -2,12 +2,12 @@
 
 @section('content')
  
-<div class="heading_container heading_center">
+<div class="heading_container heading_center" style="font-family: 'Roboto', sans-serif;">
   <br>
   <h2>About Us </h2>
   <br>
 </div>
-<section class="about_section" style="background-color:#938ba1">
+<section class="about_section" style="background-color:#938ba1" style="font-family: 'Roboto', sans-serif;">
     <div class="container-fluid  ">
       <div class="row">
         <div class="col-md-5 ml-auto">

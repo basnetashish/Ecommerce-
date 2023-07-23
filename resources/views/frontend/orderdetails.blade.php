@@ -1,8 +1,8 @@
 @extends('frontend.mainpage')
 
 @section('content')
-<div class="bg-warning ">
-  <div class="container py-2" style="font-family: 'Lato', sans-serif;">
+<div class="bg-warning " style="font-family: 'Roboto', sans-serif;">
+  <div class="container py-2" >
     <!-- Breadcrumb -->
     <nav class="d-flex">
       <h6 class="  mb-0">
@@ -20,7 +20,7 @@
   </div>
 
 </div>
-<section style="background-color:#eee; min-height: 80vh;" >
+<section style="background-color:#eee; min-height: 80vh; font-family: 'Roboto', sans-serif;" >
   <div class="container py-5 product-data">
     @foreach($orders as $order)
     @foreach($order->orderItems as $item)
@@ -57,8 +57,8 @@
                     <p> Tracking No: <b>{{$order->tracking_no}}</b></p>
                           
                       <h6 >{{$item->Products->name}}</h6>
-                      <p>Quantity: {{$item->qty}}</p>
-                      <p >
+                      <p>Qty: {{$item->qty}}</p>
+                      <p>
                        
                         Price:  {{$item->Products->selling_price}}
                        </p>
@@ -127,20 +127,4 @@ font-weight: bold;
 }
 </style>
 
-{{-- @section('script')
-<script>
-  $(document).ready(function(){
-    console.log('loaded')
-    var status = {{$order->status}}
-    console.log('Status:', status);
-    if(status == 'completed'){
-      $('.orderCancel').removeClass('d-none');
-    }else{
-      $('.orderCancel').addClass('d-none');
-    }
-
-  });
-</script>
-
-@endsection --}}
 @endsection

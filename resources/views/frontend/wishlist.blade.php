@@ -2,8 +2,8 @@
 
 @section('content')
   <?php  $total = 0    ?>
-<div class="bg-warning">
-    <div class="container py-2" style="font-family: 'Lato', sans-serif;">
+<div class="bg-warning" style="font-family: 'Roboto', sans-serif;">
+    <div class="container py-2" style="font-family: 'Roboto', sans-serif;">
       <!-- Breadcrumb -->
       <nav class="d-flex">
         <h6 class="  mb-0">
@@ -16,9 +16,9 @@
       </nav>
       <!-- Breadcrumb -->
     </div>
-  </div>
+</div>
    @if ($wishlists->count() >= 1)
-   <section class="h-100" style="background-color: #eee; font-family: 'Lato', sans-serif;">
+<section class="h-100" style="background-color: #eee; font-family: 'Roboto', sans-serif;">
     <div class="container h-100 py-5">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-10">
@@ -39,7 +39,7 @@
                     class="img-fluid rounded-3" alt="Cotton T-shirt">
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3">
-                  <p class="lead fw-normal mb-2">{{$wishlist->Products->name}}</p>
+                  <h4 class=" fw-normal mb-2"> {{$wishlist->Products->name}}</h4>
                   <p>
                     @if($wishlist->products->trending == true)
                         <span class="badge badge-danger"> Trending</span>
@@ -89,20 +89,11 @@
           </div>
   
           @endforeach
-  
-          
-  
-          {{-- <div class="card mb-4">
-            <div class="card-body flex-row">
-          
-            </div>
-          </div> --}}
-  
-        
     </div>
-</section>
+     
+    
    @else 
-   <div class="container-fluid  mt-150 py-4">
+   <div class="container-fluid  mt-150 py-4" style="font-family: 'Roboto', sans-serif;">
     <div class="row">
     
      <div class="col-md-12">
@@ -116,14 +107,9 @@
              <a href="{{url('/category')}}">
               <button type="button" class="btn btn-primary btn-sm">Continue Shopping</button>
 
-             </a>
-            
-             
-           
+             </a>     
        
    </div>
-       
-     
      </div>
     
     </div>
@@ -131,7 +117,9 @@
    </div>
    @endif
 
-
+      </div>
+    </div>
+</section>
 @endsection
 
 @section('script')

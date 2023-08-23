@@ -13,8 +13,9 @@ use App\Http\Controllers\Backend\PDFController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\Backend\UiController;
 use App\Http\Controllers\UserController;
-
-
+use App\Http\Controllers\RolesController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\UserRoleController;
 
 
 /*
@@ -79,7 +80,7 @@ Route::get('backend/ui/delete/{id}',[UiController::class,'deleteInformation'])->
 // order Invoice
 Route::get('/order-invoice/{id}',[PDFController::class,'orderinvoice'])->name('order.invoice');
 
-
+Route::get('backend/product/subcategory',[CategoryController::class,'subcategory'])->name('backend.subcategory');
 });
 //frontend 
 //Category
@@ -96,7 +97,11 @@ Route::get('/about',[UserController::class,'about'])->name('f_about');
 Route::get('/testimonial',[UserController::class,'test'])->name('f_testimonial');
 
 Route::get('/category/{slug}',[UserController::class,'viewproduct'])->name('f_viewcategory');
+
 Route::get('products/{prod_slug}',[UserController::class,'productdetails'])->name('f_productdetails');
+
+Route::get('products-subcategory',[UserController::class,'subcategoryproducts'])->name('get-products-subcateogry');
+Route::get('subcategory',[UserController::class,'subcategory'])->name('subcategory');
 
 Route::middleware(['auth'])->group(function () {
   Route::get('/cart1',[CartController::class,'viewcart']);
@@ -120,4 +125,20 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/order-cancel/{id}',[OrderController::class,'orderDelete'])->name('order.cancel');
 });
 
+Route::group(['middleware' => ['auth']], function(){
+  Route::resources([
+    'roles' => RolesController::class,
+    'users' => UserRoleController::class,
+]);
+  
+
+
+});
+
+Route::get('/create-testimonial',[TestimonialController::class,'create'])->name('create.testimonial');
+Route::post('/store-testimonial',[TestimonialController::class,'store'])->name('store.testimonial');
+Route::get('/index-testimonial',[TestimonialController::class,'index'])->name('index.testimonial');
+Route::get('/edit-testimonial/{id}',[TestimonialController::class,'edit'])->name('edit.testimonial');
+Route::put('/update-testimonial/{id}',[TestimonialController::class,'update'])->name('update.testimonial');
+Route::delete('/delete-testimonial/{id}',[TestimonialController::class,'destroy'])->name('delete.testimonial');
 

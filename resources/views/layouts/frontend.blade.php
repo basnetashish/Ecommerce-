@@ -125,6 +125,9 @@
                 <li class="nav-item {{ Request::is('category') ? 'active' : '' }}">
                   <a class="nav-link" href="{{ url('/category') }}">Category</a>
                 </li>
+                <li class="nav-item {{ Request::is('category') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/subcategory') }}">SubCategory</a>
+                </li>
                 <li class="nav-item {{ Request::is('placeorder') ? 'active' : '' }}">
                   <a class="nav-link" href="{{ url('/placeorder') }}">My Orders</a>
                 </li>
@@ -351,10 +354,12 @@
         </h2>
       </div>
     </div>
+
     <div class="client_container ">
       <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          @foreach($tests as $key => $test) 
+          <div class="carousel-item @if($key === 0) active @endif">
             <div class="container">
               <div class="box">
                 <div class="detail-box">
@@ -362,94 +367,30 @@
                     <i class="fa fa-quote-left" aria-hidden="true"></i>
                   </p>
                   <p>
-                    It is a long established fact that a reader will be distracted by the readable content of a page
-                    when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it lookIt is a
-                    long established fact that a reader will be distracted by the readable content of a page when
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it look
+                      {{$test->message}}
                   </p>
                 </div>
                 <div class="client-id">
                   <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/client.jpg')}}" height="100px;" alt="">
+                    <img src="{{asset('assets/testimonial/'.$test->image)}}" height="60px;" width="50px;" alt="image">
                   </div>
                   <div class="name">
                     <h5>
-                      James Dew
+                      {{$test->name}}
                     </h5>
                     <h6>
-                      Photographer
+                 {{$test->profession}}
                     </h6>
                   </div>
+                  
                 </div>
+               
               </div>
+             
             </div>
+            
           </div>
-          <div class="carousel-item">
-            <div class="container">
-              <div class="box">
-                <div class="detail-box">
-                  <p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </p>
-                  <p>
-                    It is a long established fact that a reader will be distracted by the readable content of a page
-                    when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it lookIt is a
-                    long established fact that a reader will be distracted by the readable content of a page when
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it look
-                  </p>
-                </div>
-                <div class="client-id">
-                  <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/client.jpg')}}" height="100px;" alt="">
-                  </div>
-                  <div class="name">
-                    <h5>
-                      James Dew
-                    </h5>
-                    <h6>
-                      Photographer
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="container">
-              <div class="box">
-                <div class="detail-box">
-                  <p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </p>
-                  <p>
-                    It is a long established fact that a reader will be distracted by the readable content of a page
-                    when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it lookIt is a
-                    long established fact that a reader will be distracted by the readable content of a page when
-                    looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
-                    distribution of letters, as opposed to using 'Content here, content here', making it look
-                  </p>
-                </div>
-                <div class="client-id">
-                  <div class="img-box">
-                    <img src="{{asset('assets/frontend/images/client.jpg')}}" height="100px;" alt="">
-                  </div>
-                  <div class="name">
-                    <h5>
-                      James Dew
-                    </h5>
-                    <h6>
-                      Photographer
-                    </h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          @endforeach
         </div>
         <div class="carousel_btn-box">
           <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
@@ -467,6 +408,7 @@
         </div>
       </div>
     </div>
+    
   </section>
   <!-- end client section -->
 
@@ -583,7 +525,6 @@
   <script src="{{asset('assets/frontend/js/custom.js')}}"></script>
 </body>
 </html>
-
 
 
 

@@ -1,5 +1,6 @@
 @extends('layouts.backend')
 @section('content')
+@include('flash-message')
 <div class="card">
     <div class="card-header">
       <h3 class="card-title">Order list</h3>
@@ -31,7 +32,7 @@
            
             @endforeach
             <td>
-                <a href="{{ route('order_edit', $order->id) }}"><button type="submit" class="btn btn-info">Edit</button></a>
+                <a href="{{ route('order_edit', $order->id) }}"><button type="submit" class="btn btn-warning">Edit</button></a>
                 <a href="{{url('order-details/'.$order->id)}}"><button type="submit" class="btn btn-primary">Detail</button></a>
               
             </td>
@@ -42,4 +43,9 @@
     </div>
     <!-- /.card-body -->
   </div>
+  <script>
+    setTimeout(function() {
+     $('#flashmsg').remove();
+    }, 2000); 
+</script>
 @endsection

@@ -9,7 +9,7 @@
       <!-- Breadcrumb -->
       <nav class="d-flex">
         <h6 class="  mb-0">
-          <a href="{{url('/home')}}" class="text-hover">Home</a>
+          <a href="{{url('/')}}" class="text-hover">Home</a>
           <span class="text-white-50 mx-2"> > </span>
           <a href="{{url('/category')}}" class="text-hover">Category</a>
           <span class="text-white-50 mx-2"> > </span>
@@ -35,9 +35,7 @@
             <div class="card-body p-4">
               <div class="row d-flex justify-content-between align-items-center product_data">
                 <div class="col-md-2 col-lg-2 col-xl-2">
-                  <img
-                    src="{{asset('assets/backend/product/'.$cart->Products->image)}}"
-                    class="img-fluid rounded-3" alt="Cotton T-shirt">
+                  <img src="{{asset('assets/backend/product/'.$cart->Products->image)}}" class="img-fluid rounded-3" alt="" >
                 </div>
                 <div class="col-md-3 col-lg-3 col-xl-3">
                   <p class="lead fw-normal mb-2">{{$cart->Products->name}}</p>

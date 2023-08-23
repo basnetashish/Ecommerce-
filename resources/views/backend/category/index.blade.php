@@ -17,14 +17,15 @@
           </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0" style="height: 300px;">
+        <div class="card-body table-responsive p-0" >
           <table class="table table-head-fixed text-nowrap">
             <thead>
               <tr>
                 <th>ID</th>
+                <th>Parent</th>
                 <th>Name</th>
                 <th>Slug</th>
-                <th>Description</th>
+                {{-- <th>Description</th> --}}
                 <th>Status</th>
                 <th>Popular</th>
                 <th>Image</th>
@@ -35,24 +36,25 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($categories as $cat)
-               <td>{{$cat->id}}</td>
-              <td>{{$cat->name}}</td>
-              <td>{{$cat->slug}}</td>
-              <td>{{$cat->description}}</td>
-              <td>{{$cat->status}}</td>
-              <td>{{$cat->popular}}</td>
+              @foreach($categories as $category)
+               <td>{{$category->id}}</td>
+               <td>{{$category->parent_id}}</td>
+              <td>{{$category->name}}</td>
+              <td>{{$category->slug}}</td>
+              {{-- <td>{{$category->description}}</td> --}}
+              <td>{{$category->status}}</td>
+              <td>{{$category->popular}}</td>
               <td>
-                <img src="{{asset('/assets/category/'.$cat->image)}}" width="50" height="50" alt="image">
+                <img src="{{asset('/assets/category/'.$category->image)}}" width="50" height="50" alt="image">
             
             </td>
               {{-- <td>{{$cat->meta_title}}</td>
               <td>{{$cat->meta_descrip}}</td>
               <td>{{$cat->meta_keywords}}</td> --}}
               <td>
-                <a href="{{url('backend/category/show/'.$cat->id)}}"> <button type="submit" class="btn btn-info">Show</button></a>
-              <a href="{{url('backend/category/edit/'.$cat->id)}}"> <button type="submit" class="btn btn-warning">Edit</button></a>
-              <a href="{{url('backend/category/delete/'.$cat->id)}}"> <button type="submit" class="btn btn-danger">Delete</button></a>
+                <a href="{{url('backend/category/show/'.$category->id)}}"> <button type="submit" class="btn btn-info">Show</button></a>
+              <a href="{{url('backend/category/edit/'.$category->id)}}"> <button type="submit" class="btn btn-warning">Edit</button></a>
+              <a href="{{url('backend/category/delete/'.$category->id)}}"> <button type="submit" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger">Delete</button></a>
               </td>
 
              
@@ -74,7 +76,7 @@
   $(function(){
 setTimeout(function(){
     $("#flashmsg").hide();
-    }, 2000);
+    }, 3000);
   });
 </script>
 @endsection

@@ -3,13 +3,9 @@
  
 <div class="row">
     <div class="col-12">
-      @if(session()->has('success'))
-    <div class="alert alert-success">
-        {{ session()->get('success') }}
-        
-    </div>
-    {{-- @include('flash-message') --}}
-@endif
+
+    @include('flash-message')
+
       <div class="card">
         <div class="card-header">
           <p class="card-title"><b><h2>Products Table</p></b></h3>
@@ -23,12 +19,13 @@
           </div>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0" style="height: 300px;">
+        <div class="card-body table-responsive p-0" >
           <table class="table table-head-fixed text-nowrap">
             <thead>
               <tr>
                 <th>Category </th>
                 <th>Product Name</th>
+
                 <th>Slug</th>
                 {{-- <th>Small Description</th>
                 <th>Description</th> --}}
@@ -36,8 +33,8 @@
                 <th>Selling Price</th>
                 <th>Image</th>
                 <th>Quantity</th>
-                <th>Tax</th>
-                <th>Status</th>
+                {{-- <th>Tax</th> --}}
+                {{-- <th>Status</th> --}}
                 {{-- <th>Trending</th> --}}
                 {{-- <th>Meta Title</th>
                 <th>Meta Description</th>
@@ -49,6 +46,7 @@
               @foreach($Products as $product)
                <td>{{$product->category->name}}</td>
               <td>{{$product->name}}</td>
+        
                <td>{{$product->slug}}</td>
               {{-- <td>{{$product->small_description}}</td> --}}
               {{-- <td>{{$product->description}}</td>  --}}
@@ -59,8 +57,8 @@
             
             </td>
               <td>{{$product->qty}}</td>
-              <td>{{$product->tax}}</td>
-              <td>{{$product->status}}</td>
+              {{-- <td>{{$product->tax}}</td> --}}
+              {{-- <td>{{$product->status}}</td> --}}
               {{-- <td>{{$product->trending}}</td> --}}
               {{-- <td>{{$product->meta_title}}</td>
               <td>{{$product->meta_descrip}}</td>
@@ -68,7 +66,7 @@
               <td>
                 <a href="{{url('backend/product/show/'.$product->id)}}"> <button type="submit" class="btn btn-info">show</button></a>
                 <a href="{{url('backend/product/edit/'.$product->id)}}"> <button type="submit" class="btn btn-warning">Edit</button></a>
-              <a href="{{url('backend/product/delete/'.$product->id)}}"> <button type="submit" class="btn btn-danger">Delete</button></a>
+              <a href="{{url('backend/product/delete/'.$product->id)}}"> <button type="submit" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger">Delete</button></a>
              
               </td>
 
@@ -84,5 +82,9 @@
       <!-- /.card -->
     </div>
   </div>
-
+  <script>
+    setTimeout(function() {
+     $('#flashmsg').remove();
+    }, 2000); 
+</script>
 @endsection

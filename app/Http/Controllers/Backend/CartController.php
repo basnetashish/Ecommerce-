@@ -18,10 +18,16 @@ class CartController extends Controller
         if(Auth::check()){
             $product_check = Product::where('id',$product_id)->first();
         if($product_check){
+            $items = Cart::where('user_id',Auth::id())->count();
+            if($items >7){
+                 return  response()->json(['status' => " You have reached the maximum number of items in your cart, Please check out first before adding item into cart"]);
+            }
+
             if(Cart::where('prod_id',$product_id)->where('user_id',Auth::id())->exists()){
 
-                return response()->json(['status'=> $product_check->name. " already added to the cart"]);
+            return  response()->json(['status' => $product_check->name. " already added to the cart"]);
             }
+
             else{
             $cart = new Cart();
             $cart->prod_id = $product_id;
@@ -34,10 +40,13 @@ class CartController extends Controller
            return  response()->json(['status' => $product_check->name. " added to cart successfully"]);
             }
         }
+        
+        
         }else{
             return  redirect('/login')->with('error',"login required");
         }
     }
+   
 
     public function viewcart()
     {

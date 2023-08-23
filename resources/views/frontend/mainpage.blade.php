@@ -145,6 +145,9 @@
                 <li class="nav-item {{ Request::is('category') ? 'active' : '' }}">
                   <a class="nav-link" href="{{ url('/category') }}">Category</a>
                 </li>
+                <li class="nav-item {{ Request::is('subcategory') ? 'active' : '' }}">
+                  <a class="nav-link" href="{{ url('/subcategory') }}">SubCategory</a>
+                </li>
                 <li class="nav-item {{ Request::is('placeorder') ? 'active' : '' }}">
                   <a class="nav-link" href="{{ url('/placeorder') }}">My Orders</a>
                 </li>
@@ -265,6 +268,7 @@
                   Category
                 </a>
               </li>
+
             
               <li>
                 <a href="{{asset('/testimonial')}}">

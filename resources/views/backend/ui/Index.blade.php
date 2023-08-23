@@ -44,7 +44,7 @@
                   <td>
                      <div style="display:flex;">
                         <a href="{{route('information.edit',['id'=>$ui->id])}}"><button class="btn btn-warning">Edit</button></a>
-                    <a href=" {{route('information.delete',['id'=>$ui->id])}}"><button class="btn  btn-danger"  style="margin-left:3px;">Delete</button></a>
+                    <a href=" {{route('information.delete',['id'=>$ui->id])}}"><button class="btn  btn-danger"  onclick="return confirm('Are you sure to delete?')" style="margin-left:3px;">Delete</button></a>
                      </div>
 
                   </td>
@@ -60,16 +60,11 @@
       <!-- /.card -->
     </div>
   </div>
- 
-@endsection
-@section('script')
- <script>
-  $(document).ready(function(){
+  <script>
     setTimeout(function() {
-    $('#flashmsg').fadeOut('fast');
-}, 3000);
-  });
- </script>
-
+     $('#flashmsg').remove();
+    }, 3000); 
+</script>
 @endsection
+
 

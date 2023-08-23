@@ -16,6 +16,7 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   
@@ -27,63 +28,53 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-     
+
     </ul>
 
-    <!-- SEARCH FORM -->
-    
+    <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
+      <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-          
           <i class="far fa-bell"></i>
           @foreach($user as $users)
           <span class="badge badge-warning navbar-badge">{{$users->unreadNotifications->count()}}</span>
           @endforeach
         </a>
-       
         @foreach($user as $admin)
-        
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">{{$admin->notifications->count()}} Notifications</span>
           @foreach($admin->notifications as $notification)
           <div class="dropdown-divider"></div>
-          <div class="notification">
-              <a href="#" class="dropdown-item">
-                  @if($notification->type === 'App\Notifications\OrderCancelNotification')
-                   
-                      <span>{{ $notification->data['tracking_no'] }} order cancelled</span> <br> 
-                      <span><small>{{$notification->created_at}}</small></span> 
-                  @elseif($notification->type === 'App\Notifications\OrderNotification')
-                      <span>{{ $notification->data['tracking_no'] }} order added</span><br>
-                      <span><small>{{$notification->created_at}}</small></span>
-                  @endif
-              </a>
-              <?php $notification->markAsRead(); ?>
-          </div>
-      @endforeach
-            @endforeach
-          </div>
-         
-          
-        </div>
-        
+          @if($notification->type === 'App\Notifications\OrderCancelNotification')
+          <a href="#" class="dropdown-item">
+             {{ $notification->data['tracking_no'] }} order cancelled <br>
+            <span class=" text-muted text-sm " style="margin-left: 15px;">{{$notification->created_at}}</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          @elseif($notification->type === 'App\Notifications\OrderNotification')
+          <a href="#" class="dropdown-item">
+            {{ $notification->data['tracking_no'] }} order added <br>
+            <span class="text-muted text-sm"style="margin-left: 15px;">{{$notification->created_at}}</span>
+          </a>
+          @endif
+
+         @endforeach
+        @endforeach
       </li>
-     
-        <li>
+      <li class="nav-item">
         <a class="dropdown-item" href="{{ route('logout') }}"
         onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
          {{ __('Logout') }}
      </a>
-      </li>
+
      <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
          @csrf
      </form>
       </li>
-    </ul>   
-    <!-- Right navbar links -->
-    
+    </ul>
   </nav>
   <!-- /.navbar -->
 
@@ -114,6 +105,58 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
          
+               <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class=" nav-icon fa fa-user"></i>
+                  <p>
+                 User
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('users.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Create User</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('users.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>User List</p>
+                    </a>
+                  </li>
+               
+    
+                </ul>
+              </li>
+              
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class=" nav-icon fa fa-users"></i>
+                  <p>
+                  Roles
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{route('roles.create')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Create Roles</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('roles.index')}}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Roles List</p>
+                    </a>
+                  </li>
+               
+    
+                </ul>
+              </li>
+             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -163,9 +206,10 @@
               
             </ul>
           </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
               Carts
                 <i class="fas fa-angle-left right"></i>
@@ -200,6 +244,31 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
+              <i class=" nav-icon fa fa-comment"></i>
+              <p>
+             Testimonial
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('create.testimonial')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Create Testimonial</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('index.testimonial')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Testimonial List</p>
+                </a>
+              </li>
+           
+
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
                   Ui
@@ -219,9 +288,11 @@
                   <p>Information List</p>
                 </a>
               </li>
+              
 
             </ul>
           </li>
+         
          
         </ul>
       </nav>

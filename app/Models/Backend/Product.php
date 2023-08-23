@@ -32,4 +32,10 @@ class Product extends Model
 public function category(){
     return $this->belongsTo(Category::class,'cate_id','id');
 }
+
+public function subcategory()
+{
+    return $this->belongsTo(Category::class,'subcategory_id','id');
+}
+
 }

@@ -10,20 +10,27 @@
     <!-- form start -->
     <form role="form" action="{{url('/backend/product/store')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        
       <div class="card-body">
          <!-- select -->
          <div class="form-group">
             <label>Category</label>
-        
-            
-            <select class="form-control" name="cate_id">
+            <select class="form-control" name="cate_id" id="category">
+            <option value="">Select the  Category</option>
               @foreach($products as $id => $product)
               <option value="{{$id}}" >{{$product}}</option>
               @endforeach
             </select>
-
         </div>
+        <div class="form-group" >
+          <label>Sub Category</label>
+          <select class="form-control" name="parent" id="subcategory">
+            <option value="">Select Sub Category</option>
+            @foreach($categories as $id => $category)
+            <option value="{{$id}}" >{{$category}}</option>
+            @endforeach
+          </select>
+
+      </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Products Name</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="name"  value="{{old('name')}}" placeholder="Enter products name ">
@@ -31,13 +38,7 @@
           <div class=" text-small text-danger" >{{ $message }}</div>
           @enderror
         </div>
-        
-            {{-- <div class="form-group">
-              <label for="exampleInputEmail1">Products Slug</label>
-              <input type="text" class="form-control" id="exampleInputEmail1" name="slug"  value="{{old('slug')}}" placeholder="Enter products slug ">
-            </div> --}}
-       
-        
+ 
         <div class="form-group">
           <label for="exampleInputPassword1">Small Description</label>
           <input type="text" class="form-control" id="exampleInputPassword1" name="small_descripiton" value="{{old('small_descripiton')}}" placeholder="Enter small description">
@@ -108,5 +109,42 @@
       </div>
     </form>
   </div>
+
+@endsection
+@section('scripts')
+<script>
+  $(document).ready(function() {
+    console.log("Document ready!");
+    $('#category').on('change', function() {
+        console.log("Category change !"); 
+          var selectCategory = $(this).val();
+          $.ajaxSetup({
+             headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+          });
+  
+          $.ajax({
+              type: "GET",
+              url: "{{ route('backend.subcategory') }}", 
+              data: {
+                  'cate_id': selectCategory,
+              },
+              dataType: "json",
+              success: function(response) {
+                  var subCategorySelect = $("#subcategory");
+                  subCategorySelect.empty();
+                  subCategorySelect.append('<option value="">Select Sub Category</option>');
+                  $.each(response, function(key, value) {
+                      subCategorySelect.append('<option value="' + key + '">' + value + '</option>');
+                  });
+              },
+              error: function(xhr, status, error) {
+                  console.log(error);
+              }
+          });
+      });
+  });
+  </script>
 
 @endsection

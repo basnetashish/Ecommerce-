@@ -27,16 +27,15 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.category.create');
+        $categories= Category::where('parent_id', null)->pluck('name','id')->toArray();
+        return view('backend.category.create',compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(CategoryRequest $request)
-    {
-      
-          
+    {  
         $categories = new Category();
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -45,7 +44,7 @@ class CategoryController extends Controller
             $file->move('assets/category/', $fileName);
             $categories->image = $fileName;
         }
-
+        $categories->parent_id = $request->input('parent');
         $categories->name = $request->input('name');
         $categories->slug = str::slug($request->name);
         $categories->description = $request->input('description');
@@ -120,5 +119,13 @@ class CategoryController extends Controller
         $categories->delete();
          
         return redirect()->route('c_index')->with('success',"Successfully deleted Category");
+    }
+
+    public function subcategory(Request $request){
+      
+       $subcategory = $request->input('cate_id');
+         $selectsubcategory = Category::where('parent_id',$subcategory)->pluck('name','id')->toArray();
+          return response()->json( $selectsubcategory);
+
     }
 }

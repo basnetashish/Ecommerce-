@@ -9,7 +9,28 @@
     <!-- form start -->
     <form role="form" action="{{url('/backend/category/store')}}" method="POST" enctype="multipart/form-data">
         @csrf
+
       <div class="card-body">
+        <div class="custom-control custom-radio">
+          <input type="radio"  name="customRadio" id="main" onchange="hideParent()" >
+          <label for="customRadio1" >Main Category</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input  type="radio" id="customRadio1" name="customRadio" onchange="hideParent()">
+          <label for="customRadio1" >Sub Category</label>
+        </div>
+
+        <div class="form-group" id="parent">
+          <label>Parent Id</label>
+          <select class="form-control" name="parent">
+            <option value="">Select Category</option>
+            @foreach($categories as $id => $category)
+            
+            <option value="{{$id}}" >{{$category}}</option>
+            @endforeach
+          </select>
+
+      </div>
         <div class="form-group">
           <label for="exampleInputEmail1"> Category Name</label>
           <input type="text" class="form-control" id="exampleInputEmail1" name="name"  value="{{old('name')}}" placeholder="Enter category name ">
@@ -82,6 +103,22 @@
     </form>
   </div>
 
-  
+
 
 @endsection
+<script>
+  function hideParent()
+  {
+    const  maincategory = document.getElementById("main");
+    const  parentcategory = document.getElementById("parent");
+
+    if(maincategory.checked)
+    {
+      parentcategory.style.display ='none';
+    }
+    else{
+      parentcategory.style.display ='block';
+    }
+
+  }
+</script>

@@ -27,9 +27,11 @@
        
    
     </div>
+    {{-- @dd($products); --}}
     <!-- /.card-header -->
     <div class="card-body p-0">
       <table class="table table-striped">
+    
         <tr>
             <th>Product Id</th>
             <td>{{$products->id}}</td>
@@ -40,6 +42,17 @@
             <td>{{$products->category->name}}</td>
           </tr>
 
+        @if($products->subcategory_id !=null)
+          <tr>
+            <th>Sub Category</th>
+            <td>
+                  {{$products->subcategory->name}}
+            </td>
+          </tr>
+          @endif
+   
+        
+       
           <tr>
             <th>Product Name</th>
             <td>{{$products->name}}</td>

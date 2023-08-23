@@ -26,8 +26,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $products= Category::all()->pluck('name','id')->toArray();
-        return view('backend.product.create',compact('products'));
+        $products= Category::where('parent_id',null)->pluck('name','id')->toArray();
+        $categories = Category::whereNotNull('parent_id')->pluck('name','id')->toArray();
+    //   dd($categories);
+        return view('backend.product.create',compact('products','categories'));
     }
 
     /**
@@ -35,12 +37,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validator = $request->validate([
             'name'=> 'required|unique:products|min:3',
 
         ]);
        $products = new Product();
       
+     
        if($request->hasFile('image')){
         $file  = $request->file('image');
         $extension =$file->getClientOriginalExtension();
@@ -49,6 +53,7 @@ class ProductController extends Controller
         $products->image = $fileName;
        }
         $products->cate_id = $request->input('cate_id');
+        $products->subcategory_id = $request->input('parent');
         $products->name = $request->input('name');
         $products->slug =str::slug($request->name);
         $products->small_description = $request->input('small_descripiton');
@@ -76,15 +81,10 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $products = Product::find($id);
-
-        if($products){
-            return view('backend.product.show', compact('products'));
-            response()->session()->flash('success',"Product found");
-        }else{
-            response()->session()->flash('error', "Product not found");
-            return redirect()->route('p_index');
-        }
+        $products = Product::with('category.subcategories')->find($id);
+       
+        return view('backend.product.show', compact('products'));
+ 
     }
 
     /**
